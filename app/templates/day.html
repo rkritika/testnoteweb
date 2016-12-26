@@ -1,0 +1,35 @@
+<div class="padding" ng-controller="dayCtrl">
+  <div class="full col-sm-9">
+    <!-- content -->
+    <!--/top story-->
+    <div class="row">
+      <div class="text-center day-hr">
+        <h5>DAY</h5>
+      </div>
+    </div>
+    <div class="loading" id="BodyField">
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+    </div>
+    <div class="row first-row" ng-repeat="i in events" ng-click="goToEvent(i)">
+      <div class="col-md-3 col-sm-5 col-xs-12">
+        <a><img ng-src="{{i.link}}" class="img-responsive" style="height: 161px; width:221px;"></a>
+      </div>
+      <div class="col-md-6 col-sm-5 col-xs-12">
+        <h3 class="event-time">{{i.time}}</h3>
+        <h4>{{i.name}}</h4>
+      </div>
+      <div class="col-md-1 col-sm-12 col-xs-12 hc-icon hidden-xs">
+        <a class="icoo"><img ng-src="{{imgcomment}}" class="img-responsive "></a>
+        {{i.comments.count}}
+      </div>
+      <div class="col-md-1 col-sm-12 col-xs-12 hc-icon hidden-xs">
+        <a class="icoo"><img ng-src="{{imgheart}}" class="img-responsive "> </a>
+        {{i.likes}}
+      </div>
+    </div>
+  </div>
+  <!-- /col-9 -->
+</div>

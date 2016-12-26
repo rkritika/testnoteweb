@@ -1,0 +1,80 @@
+<div class="padding" ng-controller="eventCtrl">
+  <div class="full col-sm-9">
+    <!-- content -->
+    <!--/top story-->
+    <div class="row">
+      <div class="text-center day-hr">
+        <h5>DAY</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 cook-img">
+        <img class="img-responsive" ng-src="{{baseurl+data.link}}" style="height:auto; width:100%; alt=" ">
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-4 social ">
+          <div class="com-hea ">
+            <img class="img-responsive comment " ng-src="{{imgheart}} " alt=" ">
+             <p>{{data.likes}}</p>
+             </div> 
+             &nbsp;&nbsp;&nbsp;
+             <div class="com-hea ">
+            <img class="img-responsive heart " ng-src="{{imgcomment}} " alt=" ">
+            &nbsp;<p>{{data.comments.count}}</p>                     
+            </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-6 ">
+          <h3 class="Barbecue ">{{data.name}}</h3>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-3 ">
+          <h3 class="oct ">{{data.date}}</h3>
+        </div>
+        <div class="col-md-2 ">
+          <h3 class="oct ">{{data.time}}</h3>
+        </div>
+        <div class="col-md-offset-4 col-md-1 ">
+          <a class="btn btn-default save-btn ">Save</a>
+       </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-6 ">
+          <img class="img-responsive loca " src="../assets/images/ic_loc.png " alt=" ">
+          <p class="party ">{{data.location}}</p>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-8 ">
+          <p class=" ">{{data.description}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- /col-9 -->
+  
+<!-- /main -->
+</div>
+<script type="text/javascript ">
+$(document).ready(function() {
+  $(".responsive-calendar ").responsiveCalendar({
+    time: '2016-12',
+    events: {
+      "2016-04-30 ": {
+        "number ": 5,
+        "url ": " "
+      },
+      "2016-04-26 ": {
+        "number ": 1,
+        "url ": " "
+      },
+      "2016-12-12 ": {
+        "number ": 1
+      },
+      "2016-12-12 ": {}
+    }
+  });
+});
+</script>

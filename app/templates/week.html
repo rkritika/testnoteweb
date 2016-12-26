@@ -1,0 +1,123 @@
+<div class="padding" ng-controller="weekCtrl">
+  <div class="full col-sm-9">
+    <!-- content -->
+    <!--/top story-->
+    <div class="row">
+      <div class="text-center day-hr">
+        <h5>WEEK</h5>
+      </div>
+    </div>
+    <div class="loading" id="BodyField">
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+    </div>
+    <div class="gridListdemoWeekUsage">
+      <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="7" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+        <md-grid-tile class="sun" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
+          <div class="week">
+            <p>SUN</p>
+          </div>
+        </md-grid-tile>
+        <md-grid-tile class="mon" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
+          <div class="week">
+            <p>MON</p>
+          </div>
+        </md-grid-tile>
+        <md-grid-tile class="tue" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
+          <div class="week">
+            <p>TUE</p>
+          </div>
+        </md-grid-tile>
+        <md-grid-tile class="wed" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
+          <div class="week">
+            <p>WED</p>
+          </div>
+        </md-grid-tile>
+        <md-grid-tile class="thu" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
+          <div class="week">
+            <p>THU</p>
+          </div>
+        </md-grid-tile>
+        <md-grid-tile class="fri" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
+          <div class="week">
+            <p>FRI</p>
+          </div>
+        </md-grid-tile>
+        <md-grid-tile class="sat" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
+          <div class="week">
+            <p>SAT</p>
+          </div>
+        </md-grid-tile>
+      </md-grid-list>
+    </div>
+    <div class="gridListdemoBasicUsage" layout="row">
+      <div class='md-padding' layout="column" layout-wrap>
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Sunday | orderBy : 'time'">
+          <img src="{{event.link}}" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-dis"> {{event.name}}</p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class='md-padding' layout="column" layout-wrap>
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Monday | orderBy : 'time'">
+          <img src="{{event.link}}" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-dis"> {{event.name}}</p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class='md-padding' layout="column" layout-wrap>
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Tuesday | orderBy : 'time'">
+          <img src="{{event.link}}" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-dis"> {{event.name}}</p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class='md-padding' layout="column" layout-wrap>
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Wednesday | orderBy : 'time'">
+          <img src="{{event.link}}" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-dis"> {{event.name}}</p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class='md-padding' layout="column" layout-wrap>
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Thursday | orderBy : 'time'">
+          <img src="{{event.link}}" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-dis"> {{event.name}}</p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class='md-padding' layout="column" layout-wrap>
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Friday | orderBy : 'time'">
+          <img src="{{event.link}}" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-dis"> {{event.name}}</p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class='md-padding' layout="column" layout-wrap>
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Saturday | orderBy : 'time'">
+          <img src="{{event.link}}" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-dis"> {{event.name}}</p>
+          </md-card-content>
+        </md-card>
+      </div>
+    </div>
+  </div>
+  <!-- /col-9 -->
+</div>
+<!-- /padding -->

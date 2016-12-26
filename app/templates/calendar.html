@@ -1,0 +1,97 @@
+<div>
+  <nav class="navbar navbar-custom2 navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top">
+          <a class="navbar-brand" href="/"><img class="img-responsive" src="../assets/images/timenote_logo.png" alt=""></a> <span class="light">Timenote</span>
+        </a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-right navbar-main-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+          <li class="hidden">
+            <a href="#page-top"></a>
+          </li>
+          <li>
+            <a href=""><i class="fa fa-search nav-search" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a class="page-scroll" href="">Explore</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="/calendar">My Calendar</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#">Jobs</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="">Press</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="">Job</a>
+          </li>
+          <li ng-if="!isLoggedIn">
+            <a class="page-scroll" href="" ng-click="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+  <div class="wrapper">
+    <div class="box">
+      <div class="row">
+        <!-- sidebar -->
+        <div class="column col-lg-3 col-sm-5" id="sidebar">
+          <div class="col-md-offset-2 col-md-6 text-center">
+            <a class="logo" href="#"><img src="../assets/images/user.png" class="img-circle"></a>
+          </div>
+          <div class="col-md-4">
+            <a class="share" href="#"><img src="../assets/images/share.png" class=""></a>
+          </div>
+          <div class="col-md-12 text-center profile-name">
+            <h3>Ronny</h3>
+          </div>
+          <div class="col-md-6 col-sm-12 follo">
+            <h5>568</h5>
+            <p>Followers</p>
+          </div>
+          <div class="col-md-6 col-sm-12 follo">
+            <h5>568</h5>
+            <p>Followers</p>
+          </div>
+          <div class="btn-group col-md-12 col-sm-12">
+            <button class="tn btn three" ui-sref=".day">TODAY</button>
+            <button class="tn btn three" ui-sref=".week" hide-xs hide-sm>WEEK</button>
+            <button class="tn btn three" ui-sref=".month">MONTH</button>
+          </div>
+          <!-- Responsive calendar - START -->
+          <div class="col-md-12 my-cal" ng-controller="myCtrl">
+            <div>
+              <div style="display:inline-block; min-height:50px;">
+                <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+              </div>
+              <hr />
+            </div>
+          </div>
+        </div>
+        <!-- /sidebar -->
+        <!-- main -->
+        <div ui-view class="column col-lg-9 col-sm-7" id="main">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+$('.tn').on('click', function() {
+  $('.tn').removeClass('three2').addClass('three');
+  $(this).removeClass('three').addClass('three2');
+})
+</script>

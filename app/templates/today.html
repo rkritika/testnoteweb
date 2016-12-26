@@ -1,0 +1,108 @@
+<div class="wrapper">
+  <div class="box">
+    <div class="row">
+      <!-- sidebar -->
+      <div class="column col-sm-3" id="sidebar">
+        <div class="col-md-offset-2 col-md-6 text-center">
+          <a class="logo" href="#"><img src="assets/images/user.png" class="img-circle"></a>
+        </div>
+        <div class="col-md-4">
+          <a class="share" href="#"><img src="assets/images/share.png" class=""></a>
+        </div>
+        <div class="col-md-12 text-center profile-name">
+          <h3>Ronny</h3>
+        </div>
+        <div class="col-md-6 col-sm-12 follo">
+          <h5>568</h5>
+          <p>Followers</p>
+        </div>
+        <div class="col-md-6 col-sm-12 follo">
+          <h5>568</h5>
+          <p>Followers</p>
+        </div>
+        <div class="btn-group col-md-12 col-sm-12">
+          <button type="button" class="btn btn three">TODAY</button>
+          <button type="button" class="btn btn three hidden-xs">WEEK</button>
+          <button type="button" class="btn btn three">MONTH</button>
+        </div>
+        <!--  <div class="cal">
+      <md-calendar ng-model="day"></md-calendar>
+        </div> -->
+        <!-- Responsive calendar - START -->
+        <div>
+          <!-- <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre> -->
+          <!-- <h4>Inline</h4> -->
+          <div style="display:inline-block; min-height:290px;">
+            <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+          </div>
+          <hr />
+        </div>
+        <!-- /sidebar -->
+        <!-- main -->
+        <div class="column col-sm-9" id="main">
+          <div class="padding">
+            <div class="full col-sm-9">
+              <!-- content -->
+              <!--/top story-->
+              <div class="row">
+                <div class="text-center day-hr">
+                  <h5>DAY</h5>
+                </div>
+              </div>
+              <div class="row first-row" ng-repeat="i in records">
+                <div class="col-md-3 col-sm-5 col-xs-12">
+                  <a href="#" class=""><img ng-src="{{i.img}}" />
+                    <!-- <img src="assets/images/game.png" class="img-responsive"> --></a>
+                </div>
+                <div class="col-md-6 col-sm-5 col-xs-12">
+                  <h3 class="event-time">{{i.time}}</h3>
+                  <h4>{{i.text}}</h4>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12 hc-icon">
+                  <a href="#" class="icoo"><img ng-src="{{i.imgcomment}}" class="img-responsive comment"></a>
+                  <a href="#" class="icoo"><img ng-src="{{i.imgheart}}" class="img-responsive heart"></a>
+                </div>
+              </div>
+              <div class="row divider">
+                <div class="col-sm-12">
+                  <hr>
+                </div>
+              </div>
+              <div class="row divider">
+                <div class="col-sm-12">
+                  <hr>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <!-- /col-9 -->
+          </div>
+          <!-- /padding -->
+        </div>
+        <!-- /main -->
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".responsive-calendar").responsiveCalendar({
+    time: '2016-12',
+    events: {
+      "2016-04-30": {
+        "number": 5,
+        "url": ""
+      },
+      "2016-04-26": {
+        "number": 1,
+        "url": ""
+      },
+      "2016-12-12": {
+        "number": 1
+      },
+      "2016-12-12": {}
+    }
+  });
+});
+</script>
+<script>
