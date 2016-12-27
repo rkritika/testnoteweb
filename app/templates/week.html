@@ -53,65 +53,65 @@
       </md-grid-list>
     </div>
     <div class="gridListdemoBasicUsage" layout="row">
-      <div class='md-padding' layout="column" layout-wrap>
-        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Sunday | orderBy : 'time'">
+      <div class='md-padding' layout="column" layout-wrap >
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Sunday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
-          <md-card-content>
-            <p class="week-time">{{event.shortTime}}</p>
+          <md-card-content> 
+            <p class="week-time">{{event.time}}</p>
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>
       </div>
       <div class='md-padding' layout="column" layout-wrap>
-        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Monday | orderBy : 'time'">
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Monday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
           <md-card-content>
-            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-time">{{event.time}}</p>
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>
       </div>
       <div class='md-padding' layout="column" layout-wrap>
-        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Tuesday | orderBy : 'time'">
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Tuesday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
           <md-card-content>
-            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-time">{{event.time}}</p>
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>
       </div>
       <div class='md-padding' layout="column" layout-wrap>
-        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Wednesday | orderBy : 'time'">
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Wednesday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
           <md-card-content>
-            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-time">{{event.time}}</p>
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>
       </div>
       <div class='md-padding' layout="column" layout-wrap>
-        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Thursday | orderBy : 'time'">
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Thursday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
           <md-card-content>
-            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-time">{{event.time}}</p>
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>
       </div>
       <div class='md-padding' layout="column" layout-wrap>
-        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Friday | orderBy : 'time'">
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Friday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
           <md-card-content>
-            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-time">{{event.time}}</p>
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>
       </div>
       <div class='md-padding' layout="column" layout-wrap>
-        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Saturday | orderBy : 'time'">
+        <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Saturday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
           <md-card-content>
-            <p class="week-time">{{event.shortTime}}</p>
+            <p class="week-time">{{event.time}}</p>
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>

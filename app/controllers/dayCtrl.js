@@ -2,6 +2,7 @@
   var app = angular.module('myApp')
   app.controller('dayCtrl', function($scope, $location, $anchorScroll, $document, AppManager, $http, $state, $rootScope, _, $filter, cfpLoadingBar, $stateParams) {
     $scope.user_id = $stateParams.id
+    console.log($stateParams.id)
 
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       console.log('user_id, max_date, min_date')
@@ -34,6 +35,7 @@
         })
         .then(function(events) {
           if (events.length != 0) {
+
             $scope.EventsList = getEvents($scope.eventsList)
             $scope.assignDate()
           }
@@ -100,8 +102,6 @@
           getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
 
         }
-
-
         // var newMonthVal = $filter("date")(newVal.selectedDate, "MM")
       })
       // $scope.$watch(function() {
@@ -118,16 +118,19 @@
     }
 
     function assignData(data, date) {
+            console.log('hi')
+
       angular.forEach(data, function(value, key) {
         if (key === date) {
           var ev = data[key]
-          // console.log(ev.length)
+          console.log(ev)
           if (ev.length != 0) {
             $scope.events = ev
             // console.log(ev)
           }
         }
       })
+      console.log( $scope.events)
     }
 
     $scope.goToEvent = function(event) {

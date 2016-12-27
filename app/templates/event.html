@@ -9,19 +9,20 @@
     </div>
     <div class="row">
       <div class="col-md-12 cook-img">
-        <img class="img-responsive" ng-src="{{baseurl+data.link}}" style="height:auto; width:100%; alt=" ">
+        <img class="img-responsive" ng-src="{{baseurl+data.link}}" style="height:auto; alt=" ">
         </div>
       </div>
       <div class="row ">
-        <div class="col-md-4 social ">
+        <div class="col-md-1 social ">
           <div class="com-hea ">
-            <img class="img-responsive comment " ng-src="{{imgheart}} " alt=" ">
-             <p>{{data.likes}}</p>
+            <img class="img-responsive icoo " ng-src="{{imgheart}} " alt=" ">
+             {{data.likes}}
              </div> 
-             &nbsp;&nbsp;&nbsp;
+             </div>
+             <div class="col-md-2 social ">
              <div class="com-hea ">
-            <img class="img-responsive heart " ng-src="{{imgcomment}} " alt=" ">
-            &nbsp;<p>{{data.comments.count}}</p>                     
+            <img class="img-responsive icoo " ng-src="{{imgcomment}} " alt=" ">
+           {{data.comments.count}}                    
             </div>
         </div>
       </div>
@@ -57,24 +58,3 @@
   
 <!-- /main -->
 </div>
-<script type="text/javascript ">
-$(document).ready(function() {
-  $(".responsive-calendar ").responsiveCalendar({
-    time: '2016-12',
-    events: {
-      "2016-04-30 ": {
-        "number ": 5,
-        "url ": " "
-      },
-      "2016-04-26 ": {
-        "number ": 1,
-        "url ": " "
-      },
-      "2016-12-12 ": {
-        "number ": 1
-      },
-      "2016-12-12 ": {}
-    }
-  });
-});
-</script>

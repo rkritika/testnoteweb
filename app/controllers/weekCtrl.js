@@ -22,8 +22,8 @@
               // $scope.week = week
               // console.log($scope.week)
             var day = $filter("date")(date, "EEEE")
-            events[key].shortDate = shortDate
-            events[key].shortTime = shortTime
+            events[key].date = shortDate
+            events[key].time = shortTime
             events[key].week = week
             events[key].day = day
             if (events[key].link != null) {
@@ -61,7 +61,13 @@
     //   getEvents($scope.events, week)
     // });
 
+   $scope.goToEvent = function(event) {
+      // console.log(event)
+      // event.user_id = $scope.user_id
+      // $location.path('/calendar/'+$scope.user_id+ '/events/' +event.id)
 
+      $state.go('calendar.event', {event:event});
+    }
     $rootScope.$watchCollection('data', function(newVal, oldVal) {
       var minDate = $scope.minDate = Date.parse(oldVal.minDate) / 1000
       var newMinDate = $scope.newMinDate = Date.parse(newVal.minDate) / 1000

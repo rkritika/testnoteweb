@@ -1,11 +1,11 @@
-<div>
+<div ng-controller="myCtrl">
   <nav class="navbar navbar-custom2 navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand page-scroll" href="#page-top">
+        <a class="navbar-brand page-scroll href="/">
           <a class="navbar-brand" href="/"><img class="img-responsive" src="../assets/images/timenote_logo.png" alt=""></a> <span class="light">Timenote</span>
         </a>
       </div>
@@ -23,10 +23,10 @@
             <a class="page-scroll" href="">Explore</a>
           </li>
           <li>
-            <a class="page-scroll" href="/calendar">My Calendar</a>
+            <a class="page-scroll" ui-sref="calendar({id: id})">My Calendar</a>
           </li>
           <li>
-            <a class="page-scroll" href="#">Jobs</a>
+            <a class="page-scroll" href="">Jobs</a>
           </li>
           <li>
             <a class="page-scroll" href="">Press</a>
@@ -34,8 +34,8 @@
           <li>
             <a class="page-scroll" href="">Job</a>
           </li>
-          <li ng-if="!isLoggedIn">
-            <a class="page-scroll" href="" ng-click="logout()">Logout</a>
+          <li ng-if="isLoggedIn">
+            <a  class="page-scroll" ng-click="logout()" href="">Logout</a>
           </li>
         </ul>
       </div>
@@ -66,12 +66,12 @@
             <p>Followers</p>
           </div>
           <div class="btn-group col-md-12 col-sm-12">
-            <button class="tn btn three" ui-sref=".day">TODAY</button>
+            <button class="tn btn three" ui-sref=".day">DAY</button>
             <button class="tn btn three" ui-sref=".week" hide-xs hide-sm>WEEK</button>
             <button class="tn btn three" ui-sref=".month">MONTH</button>
           </div>
           <!-- Responsive calendar - START -->
-          <div class="col-md-12 my-cal" ng-controller="myCtrl">
+          <div class="col-md-12 my-cal" >
             <div>
               <div style="display:inline-block; min-height:50px;">
                 <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>

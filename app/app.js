@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5'])
+  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel','ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5'])
     .value('duScrollDuration', 4000)
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
 
@@ -10,7 +10,7 @@
           url: '/',
           views: {
             '': {
-              templateUrl: './app/templates/main.html'
+              templateUrl: './app/templates/home.html'
             }
           },
           controller: 'homeCtrl'

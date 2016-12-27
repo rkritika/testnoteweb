@@ -5,25 +5,28 @@
     $scope.user_id = $stateParams.id
     $scope.dayFormat = "d";
     $scope.abc = []
+    var abc = []
 
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       console.log('user_id, max_date, min_date')
         // $scope.EventsForWeek = []
-
+      var temp = []
       console.log(user_id, max_date, min_date)
       AppManager.getEventsforTwoMonths(user_id, max_date, min_date)
         .then(function(result) {
 
           var events = result.timers
-          $scope.abc = getEvents(events)
-            console.log($scope.abc)
+          temp = getEvents(events)
+          console.log(temp)
             // return 
+            // abc = 
         })
+      return temp;
     }
     $scope.selectedDate = $rootScope.data.selectedDate
     $scope.newMinDate = Date.parse($rootScope.data.minDate) / 1000
     $scope.newMaxDate = Date.parse($rootScope.data.maxDate) / 1000
-    getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
+    abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
 
     function getEvents(events) {
       var dateEvents = []
@@ -44,7 +47,7 @@
     }
 
     // // To select a single date, make sure the ngModel is not an array.
-    
+
 
     // // If you want multi-date select, initialize it as an array.
     // // $scope.selectedDate = [];
@@ -107,26 +110,29 @@
     // $scope.tooltips = true;
     var loadContentAsync = true;
 
-    $scope.setDayContent = function(date) {
+    $scope.setDayContent = function(date, abc) {
+      console.log(date)
       var key = [date.getFullYear(), numFmt(date.getMonth() + 1), numFmt(date.getDate())].join("-");
-      var abc = $scope.abc
-        // console.log(abc)
-        // if ()
-      var temp = abc[key]
-      var data = ' ';
-      if (temp != undefined) {
-        var size = _.size(temp)
-          // console.log(size)
-        for (i = 0; i < size; i++) {
-          // console.log(temp[i].name)
-          var a = '<p style="overflow: hidden; text-overflow: ellipsis; max-width:160px; white-space:nowrap; font-size: 13px;" ng-click="">' + temp[i].time + '<br>' + temp[i].name + '</p>'
-            // console.log(data)
-          data = data.toString() + a.toString();
-          console.log(data)
-        }
-        // console.log(data)
-        return data
-      } else return ''
+      // var abc = $scope.abc
+      console.log(key)
+      // if (abc[key] != undefined) {
+      //   var temp = abc[key]
+      //   var data = ' ';
+      //   var size = _.size(temp)
+      //     // console.log(size)
+      //   for (i = 0; i < size; i++) {
+      //     // console.log(temp[i].name)
+      //     var a = '<p style="overflow: hidden; text-overflow: ellipsis; max-width:160px; white-space:nowrap; font-size: 13px;" ng-click="">' + temp[i].time + '<br>' + temp[i].name + '</p>'
+      //       // console.log(data)
+      //     data = data.toString() + a.toString();
+      //     console.log(data)
+      //   }
+      //   // console.log(data)
+      //   return data
+      // }
+
+      // // if (temp != undefined) {
+      // else return ''
 
     };
 
