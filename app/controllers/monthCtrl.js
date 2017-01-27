@@ -9,19 +9,16 @@
 
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       console.log('user_id, max_date, min_date')
-        // $scope.EventsForWeek = []
       var temp = []
       console.log(user_id, max_date, min_date)
-      AppManager.getEventsforTwoMonths(user_id, max_date, min_date)
+      return AppManager.getEventsforTwoMonths(user_id, max_date, min_date)
         .then(function(result) {
-
           var events = result.timers
           temp = getEvents(events)
           console.log(temp)
-            // return 
-            // abc = 
+          $scope.dd = temp
+          return temp;
         })
-      return temp;
     }
     $scope.selectedDate = $rootScope.data.selectedDate
     $scope.newMinDate = Date.parse($rootScope.data.minDate) / 1000
@@ -46,27 +43,10 @@
       return _.groupBy(dateEvents, 'date');
     }
 
-    // // To select a single date, make sure the ngModel is not an array.
-
-
-    // // If you want multi-date select, initialize it as an array.
-    // // $scope.selectedDate = [];
-    // $scope.firstDayOfWeek = 0; // First day of the week, 0 for Sunday, 1 for Monday, etc.
-
     $scope.dayClick = function(date) {
-      $rootScope.data.selectedDate = date
+      // $rootScope.data.selectedDate = date
       console.log($rootScope.data.selectedDate)
     };
-
-    // $scope.prevMonth = function(data) {
-    //   $scope.msg = "You clicked (prev) month " + data.month + ", " + data.year;
-    // };
-
-    // $scope.nextMonth = function(data) {
-    //   $scope.msg = "You clicked (next) month " + data.month + ", " + data.year;
-    // };
-
-    // 
 
     $rootScope.$watchCollection('data', function(newVal, oldVal) {
       var minDate = $scope.minDate = Date.parse(oldVal.minDate) / 1000
@@ -94,12 +74,6 @@
     }
 
     $scope.selectedIndex = 0;
-
-    // $scope.select = function(i) {
-    //   $scope.selectedIndex = i;
-    //   console.log(i)
-    // };
-
     var numFmt = function(num) {
       num = num.toString();
       if (num.length < 2) {
@@ -109,15 +83,43 @@
     };
     // $scope.tooltips = true;
     var loadContentAsync = true;
+    $scope.dayClick = function(date) {
+      // $scope.msg = "You clicked " + $filter("date")(date, "MMM d, y h:mm:ss a Z");
+      $rootScope.data.selectedDate = date
+      console.log( $rootScope.data.selectedDate)
+    };
 
     $scope.setDayContent = function(date, abc) {
-      console.log(date)
+      // console.log(date)
       var key = [date.getFullYear(), numFmt(date.getMonth() + 1), numFmt(date.getDate())].join("-");
-      // var abc = $scope.abc
-      console.log(key)
+      var abc = $scope.dd
+        // console.log(key)
+
+      var deferred = $q.defer();
+      $timeout(function() {
+        var abc = $scope.dd
+          // console.log($scope.dd)
+        if (abc[key] != undefined) {
+          var temp = abc[key]
+          var data = ' ';
+          var size = _.size(temp)
+
+          console.log(key)
+          console.log(size)
+          for (i = 0; i < size; i++) {
+            console.log(temp[i].name)
+            var a = '<p style="overflow: hidden; text-overflow: ellipsis; max-width:160px; white-space:nowrap; font-size: 13px;" ng-click="">' + temp[i].time + '<br>' + temp[i].name + '</p>'
+              // console.log(data)
+            data = data.toString() + a.toString();
+            console.log(data)
+          }
+        }
+        // console.log(data)
+        deferred.resolve(data);
+      }, 3000);
       // if (abc[key] != undefined) {
       //   var temp = abc[key]
-      //   var data = ' ';
+      //   var data = ' '
       //   var size = _.size(temp)
       //     // console.log(size)
       //   for (i = 0; i < size; i++) {
@@ -133,8 +135,7 @@
 
       // // if (temp != undefined) {
       // else return ''
-
+      return deferred.promise;
     };
-
   });
 })()

@@ -118,7 +118,7 @@
     }
 
     function assignData(data, date) {
-            console.log('hi')
+            // console.log('hi')
 
       angular.forEach(data, function(value, key) {
         if (key === date) {
@@ -130,7 +130,7 @@
           }
         }
       })
-      console.log( $scope.events)
+      // console.log( $scope.events)
     }
 
     $scope.goToEvent = function(event) {

@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel','ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5'])
+  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5'])
     .value('duScrollDuration', 4000)
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
 
@@ -111,11 +111,14 @@
         }
       });
     }])
+    // .directive('disableTap', function($timeout) {
+    //   return {
+    //     link: function() {
+
+    //       $timeout(function() {
+    //         document.querySelector('.pac-container').setAttribute('data-tap-disabled', 'true')
+    //       }, 500);
+    //     }
+    //   };
+    // });
 })()
-
-
-// .run(function($rootScope, $templateCache) {
-//   $rootScope.$on('$viewContentLoaded', function() {
-//      $templateCache.removeAll();
-//   });
-// });

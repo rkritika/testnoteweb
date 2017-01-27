@@ -17,6 +17,12 @@ body {
   color: blue;
 }
 
+/*.pac-container {
+  //this is a fix for google autocomplete not showing up
+  z-index: 10000 !important;
+  display: block !important;
+}*/
+
 .navbar-custom {
   margin-bottom: 0;
   border-bottom: 1px solid rgba(255, 255, 255, .3);
@@ -358,7 +364,7 @@ h4 {
 }
 
 .com-hea {
-   display: inline-block;
+  display: inline-block;
 }
 
 h2.heading-result {
@@ -367,7 +373,7 @@ h2.heading-result {
   font-weight: 600;
   line-height: 27px;
   margin-bottom: 24px;
-   margin-left: 20px;
+  margin-left: 20px;
 }
 
 .cro-image {
@@ -772,8 +778,8 @@ h2.heading-result {
   .data {
     width: 100%;
   }
-  .user-img{
-    right:6px;
+  .user-img {
+    right: 6px;
   }
   .btn-group>.btn:first-child {
     margin-left: 0px;
@@ -793,11 +799,10 @@ h2.heading-result {
     color: white !important;
     border-radius: 50% !important;
   }
-
-.event-img{
-   height:auto !important;
-   width:100%;
-}
+  .event-img {
+    height: auto !important;
+    width: 100%;
+  }
   .comment {
     padding: 1px 15px;
     display: inline;
@@ -1231,7 +1236,7 @@ md-card md-card-content>p:last-child {
 
 .md-padding {
   padding: 11.5px;
-  width:100%;
+  width: 100%;
 }
 
 .loading {
@@ -1281,7 +1286,7 @@ md-card md-card-content>p:last-child {
   }
 }
 
-.event-img{
-   height:341px;
-   width:100%;
+.event-img {
+  height: 341px;
+  width: 100%;
 }
