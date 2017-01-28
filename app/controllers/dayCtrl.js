@@ -3,6 +3,8 @@
   app.controller('dayCtrl', function($scope, $location, $anchorScroll, $document, AppManager, $http, $state, $rootScope, _, $filter, cfpLoadingBar, $stateParams) {
     $scope.user_id = $stateParams.id
     console.log($stateParams.id)
+    $scope.events = []
+    // return false;
 
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       console.log('user_id, max_date, min_date')
@@ -97,8 +99,8 @@
           $scope.assignDate()
         } else {
           $scope.events = []
-          // console.log('getEventsforTwoMonths')
-          // console.log(selectedDate)
+            // console.log('getEventsforTwoMonths')
+            // console.log(selectedDate)
           getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
 
         }
@@ -118,19 +120,19 @@
     }
 
     function assignData(data, date) {
-            // console.log('hi')
+      // console.log('hi')
 
       angular.forEach(data, function(value, key) {
-        if (key === date) {
-          var ev = data[key]
-          console.log(ev)
-          if (ev.length != 0) {
-            $scope.events = ev
-            // console.log(ev)
+          if (key === date) {
+            var ev = data[key]
+            console.log(ev)
+            if (ev.length != 0) {
+              $scope.events = ev
+                // console.log(ev)
+            }
           }
-        }
-      })
-      // console.log( $scope.events)
+        })
+        // console.log( $scope.events)
     }
 
     $scope.goToEvent = function(event) {
@@ -138,7 +140,7 @@
       // event.user_id = $scope.user_id
       // $location.path('/calendar/'+$scope.user_id+ '/events/' +event.id)
 
-      $state.go('calendar.event', {event:event});
+      $state.go('calendar.event', { event: event });
     }
 
   });

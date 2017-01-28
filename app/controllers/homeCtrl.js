@@ -49,25 +49,7 @@
           console.log($scope.address)
         });
     }
-    // $scope.show = function() {
-    //     if (navigator.geolocation) {
-    //       navigator.geolocation.getCurrentPosition(function(position) {
-    //         $scope.pos = {
-    //           lat: position.coords.latitude,
-    //           lng: position.coords.longitude
-    //         };
-    //         var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + $scope.pos.lat + "," + $scope.pos.lng + "&sensor=true";
-    //         $http.get(url)
-    //           .then(function(result) {
-    //             var address = result.data.results[2].formatted_address;
-    //             $scope.autocomplete = address;
-    //             $scope.address = address;
-    //             console.log($scope.address)
-    //           });
-    //       })
-    //     }
-    //   }
-    // $scope.myCalendar = function() {
+
     $scope.search = function(lat, long, offset) {
       $scope.slickConfig1Loaded = false;
       AppManager.getEventsByLocation(lat, long, offset)
@@ -81,7 +63,7 @@
             console.log('no data')
           }
           var someElement = angular.element(document.getElementById('demo'));
-          console.log(someElement)
+          // console.log(someElement)
           $document.scrollToElement(someElement, 30, 2000);
         })
     }
@@ -93,22 +75,6 @@
       // $state.go('calendar', { user_id: user_id });
     }
 
-    //   // console.log(auth.getToken())
-    // }
-    // $scope.pos.lat = undefined;
-    // $scope.pos.lng = undefined;
-
-    // $scope.$on('gmPlacesAutocomplete::placeChanged', function() {
-    //   // console.log( $scope.address.getPlace())
-    //   var location = $scope.autocomplete.getPlace().autocomplete().geometry.location;
-    //   $scope.address = $scope.autocomplete.getPlace()
-
-    //   $scope.pos.lat = location.lat();
-    //   $scope.pos.lng = location.lng();
-    //   console.log(location)
-    //   // $scope.address = $scope.autocomplete;
-    //   $scope.$apply();
-    // });
     $scope.baseurl = 'http://api.gotimenote.com/'
 
     $scope.getEvents = function(data) {
@@ -116,7 +82,7 @@
 
       var l = data.length
       for (i = 0; i < l; i++) {
-        console.log(data[i])
+        // console.log(data[i])
         var temp = data[i].link
         temp = temp.split('.')
         data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
@@ -127,19 +93,22 @@
 
 
     $scope.updateEvents = function() {
-      $scope.slickConfig1Loaded = false;
+      // $scope.slickConfig1Loaded = false;
       var count = $scope.data.length
       var off = $scope.posts.data.length;
       var n = count;
       var data = [];
       for (i = off; i < off + count, n > 0; ++i, n--) {
-        data.push($scope.data[count - n]);
+        // console.log(count - n)
+
+        $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>New</div>')
+          // data.push($scope.data[count - n]);
       }
-      $scope.posts.data = $scope.posts.data.concat(data)
+      // $scope.posts.data = $scope.posts.data.concat(data)
       console.log($scope.posts.data.length)
-      $timeout(function() {
-        $scope.slickConfig1Loaded = true;
-      }, 5);
+      // $timeout(function() {
+      //   $scope.slickConfig1Loaded = true;
+      // }, 5);
     }
     $scope.currentIndex = 0;
     $scope.slickConfig2 = {
@@ -147,7 +116,7 @@
       centerPadding: '60px',
       speed: 100,
       lazyLoad: 'ondemand',
-      infinite: true,
+      // infinite: true,
       slidesToShow: 3,
       responsive: [{
         breakpoint: 768,
@@ -168,25 +137,38 @@
           slidesToShow: 1
         }
       }],
-      event: {
-        afterChange: function(event, slick, currentSlide, nextSlide) {
-          $scope.currentIndex = currentSlide; // save current index each time
-          console.log($scope.currentIndex)
-        },
-        init: function(event, slick) {
-          // console.log(event)
-          return slick.slickGoTo($scope.currentIndex, false); // slide to correct index when init
-        }
+      // method : function(event, slick){
+      //   console.log("<div>New</div>")
+      //   return slick.slickAdd("<div>New</div>")
+      // }
+      // ,
+      method: {}
+      // event: {
+      //   afterChange: function(event, slick, currentSlide, nextSlide) {
+      //     $scope.currentIndex = currentSlide; // save current index each time
+      //     console.log($scope.currentIndex)
+      //   }
+      //   // ,
+      // init: function(event, slick) {
+      //   // console.log(event)
+      //   return slick.slickGoTo($scope.currentIndex, false); // slide to correct index when init
+      // }
 
-      }
+      // }
     };
 
-    $scope.$watch('currentIndex', function(newValue, oldValue) {
-      var a = newValue + 3
+    $scope.nextIndex = function() {
+      $scope.currentIndex++;
+       var a = $scope.currentIndex + 2
       if (a % 9 == 0) {
         $scope.updateEvents()
       }
-    })
+      // console.log($scope.currentIndex)
+    }
+    $scope.prevIndex = function() {
+      $scope.currentIndex--;
+      // console.log($scope.currentIndex)
+    }
 
     $scope.logout = function() {
       auth.logout()
@@ -207,7 +189,7 @@
           console.log($scope.status)
         }, function() {
           $scope.status = 'You cancelled the dialog.';
-          console.log($scope.status)
+          // console.log($scope.status)
           console.log($scope.status)
 
         });

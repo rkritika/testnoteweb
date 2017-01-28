@@ -6,10 +6,11 @@
     $scope.dayFormat = "d";
     $scope.abc = []
     var abc = []
-
+    $scope.dd = {}
+    $scope.size = 0
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       console.log('user_id, max_date, min_date')
-      var temp = []
+      var temp = {}
       console.log(user_id, max_date, min_date)
       return AppManager.getEventsforTwoMonths(user_id, max_date, min_date)
         .then(function(result) {
@@ -17,6 +18,8 @@
           temp = getEvents(events)
           console.log(temp)
           $scope.dd = temp
+          $scope.size  = _.keys($scope.dd).length
+          console.log(_.keys($scope.dd).length)
           return temp;
         })
     }
@@ -116,7 +119,7 @@
         }
         // console.log(data)
         deferred.resolve(data);
-      }, 3000);
+      }, 4000);
       // if (abc[key] != undefined) {
       //   var temp = abc[key]
       //   var data = ' '

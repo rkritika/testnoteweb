@@ -17,6 +17,12 @@ body {
   color: blue;
 }
 
+
+/*.text-info {
+    color: red;
+}*/
+
+
 /*.pac-container {
   //this is a fix for google autocomplete not showing up
   z-index: 10000 !important;
@@ -113,6 +119,12 @@ body {
   outline: 0;
 }
 
+.navbar-brand>img {
+  display: inline;
+  margin-right: 6px;
+  margin-bottom: 10px;
+}
+
 .navbar-custom2 .navbar-brand .navbar-toggle {
   padding: 4px 6px;
   font-size: 16px;
@@ -120,6 +132,13 @@ body {
 }
 
 @media(min-width:768px) {
+  .navbar-brand {
+    float: none;
+    height: 50px;
+    padding: 8px 3px;
+    font-size: 18px;
+    line-height: 20px;
+  }
   .navbar-custom2 {
     position: fixed;
     padding: 0 0;
@@ -216,7 +235,7 @@ body {
 .light {
   font-size: 30px;
   font-weight: bold;
-  line-height: 2.3;
+  /*line-height: 2.3;*/
 }
 
 .icon-addon {
@@ -442,7 +461,7 @@ h2.heading-result {
 .box {
   bottom: 0;
   left: 0;
-  margin-top: 70px;
+  margin-top: 57px;
   right: 0;
   top: 70px;
   background: #FAFBFC;
@@ -621,7 +640,8 @@ h2.heading-result {
 }
 
 .text-info {
-  color: #fff !important;
+  font-weight: bold;
+  color: red;
 }
 
 .uib-datepicker .uib-title {
@@ -765,6 +785,12 @@ h2.heading-result {
 /*mobile*/
 
 @media only screen and (max-device-width: 480px) {
+  .navbar-brand {
+    padding-top: 3px;
+  }
+  .navbar-branded {
+    padding-top: 6px;
+  }
   #sidebar,
   #sidebar a.logo {
     text-align: center;
@@ -811,9 +837,9 @@ h2.heading-result {
     padding: 0px;
     display: inline;
   }
-  #sidebar {
+/*  #sidebar {
     min-height: 880px;
-  }
+  }*/
   .modal-dialog {
     width: 317px;
     margin: 100px auto;

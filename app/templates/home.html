@@ -5,7 +5,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
-        <div class="navbar-brand page-scroll" href="/">
+        <div class="navbar-brand navbar-branded page-scroll" href="/">
           <a class="navbar-brand" href="/"><img class="img-responsive" src="assets/images/timenote_logo.png" alt="" />  <span class="light">Timenote</span></a>
         </div>
       </div>
@@ -80,10 +80,10 @@
           <div class="container">
             <div class="content">
               <div layout="row" layout-align="center center">
-                <div flex="15" style="margin-right: 14px;"><a href="" class="left"><span class="glyphicon glyphicon-menu-left"></span></a></div>
+                <div flex="15" style="margin-right: 14px;"><a href="" class="left" ng-click="prevIndex()"><span class="glyphicon glyphicon-menu-left" ></span></a></div>
                 <div>
                   <slick class="slider" lazy-load="ondemand" settings="slickConfig2" ng-if="slickConfig1Loaded" init-onload="true" next-arrow=".right" prev-arrow=".left" ng-cloak>
-                    <div ng-repeat="i in posts.data track by $index">
+                    <div  ng-repeat="i in posts.data track by $index">
                       <div class="item" ng-click="goToUser(i.user_id)">
                         <img class="cro-image" ng-src="{{ i.link }}" onerror="this.src='http://placehold.it/350x150'" height="200px" width="300px" alt="" ng-click="goToUser(i.user_id)">
                         <img class="img-responsive user-img img-circle" ng-src="{{ baseurl+i.avatar }}" height="50px" width="50px" alt="">
@@ -98,9 +98,10 @@
                     </div>
                   </slick>
                 </div>
-                <div flex="15" style="margin-left: 14px;"><a href="" class="right" style="float:right"><span class="glyphicon glyphicon-menu-right"></span></a></div>
-              </div>
+                <div flex="15" style="margin-left: 14px;"><a href="" class="right" style="float:right" ng-click="nextIndex()"><span class="glyphicon glyphicon-menu-right"></span></a></div>
+              </div> 
             </div>
+            <!-- <button ng-click="">slickAdd()</button> -->
           </div>
         </div>
       </div>

@@ -1,21 +1,24 @@
-<div class="padding">
+<div class="padding" ng-controller="monthCtrl" >
   <div class="row">
     <div class="text-center day-hr">
       <h5>MONTH</h5>
     </div>
   </div>
-<!--   <div class="loading" id="BodyField">
+    <div class="loading" id="BodyField" ng-if="size===0">
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+  </div>
+<!--   <div class="loading" id="BodyField" ng-if="dd.length===0">
     <div class="loading-bar"></div>
     <div class="loading-bar"></div>
     <div class="loading-bar"></div>
     <div class="loading-bar"></div>
   </div> -->
-  <div class="full col-sm-9" hide-xs>
-    <div ng-controller="monthCtrl" flex layout layout-fill>
+  <div class="full col-sm-9" hide-xs ng-if="size!==0">
+    <div flex layout layout-fill>
       <calendar-md flex layout layout-fill on-day-click="dayClick" title-format="'MMMM y'" ng-model='selectedDate' week-starts-on="firstDayOfWeek" day-format="dayFormat" day-content="setDayContent" disable-future-selection="false"></calendar-md>
     </div>
   </div>
 </div>
-<!-- <script type="text/javascript">
-$("#BodyField").delay(5000).fadeOut();
-</script> -->

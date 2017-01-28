@@ -7,13 +7,13 @@
         <h5>WEEK</h5>
       </div>
     </div>
-    <div class="loading" id="BodyField">
+    <div class="loading" id="BodyField" ng-if="EventsForWeek.length==0">
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
     </div>
-    <div class="gridListdemoWeekUsage">
+    <div class="gridListdemoWeekUsage" ng-if="EventsForWeek.length!==0">
       <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="7" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
         <md-grid-tile class="sun" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
           <div class="week">
