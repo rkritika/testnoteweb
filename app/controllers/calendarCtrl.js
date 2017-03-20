@@ -2,13 +2,13 @@
   var app = angular.module('myApp')
   app.controller('myCtrl', function($scope, $location, auth, $anchorScroll, $rootScope, $document, $window, AppManager, $http, $state, $stateParams) {
     var token = auth.getToken()
-    console.log(token)
-    console.log(token.user_id)
+    // console.log(token)
+    // console.log(token.user_id)
     $scope.user_id = token.user_id
-    console.log($scope.user_id)
+    // console.log($scope.user_id)
     $scope.isLoggedIn = (token != undefined)
-    console.log($scope.isLoggedIn)
-    console.log($stateParams.id)
+    // console.log($scope.isLoggedIn)
+    // console.log($stateParams.id)
     $scope.id = $stateParams.id
     $scope.logout = function() {
         console.log('hi')
