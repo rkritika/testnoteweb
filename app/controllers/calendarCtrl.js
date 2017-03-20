@@ -4,7 +4,10 @@
     var token = auth.getToken()
     // console.log(token)
     // console.log(token.user_id)
-    $scope.user_id = token.user_id
+    if(token != undefined)
+    {
+      $scope.user_id = token.user_id
+    }
     // console.log($scope.user_id)
     $scope.isLoggedIn = (token != undefined)
     // console.log($scope.isLoggedIn)
