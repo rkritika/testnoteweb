@@ -1,10 +1,10 @@
 (function() {
   var app = angular.module('myApp')
   app.controller('homeCtrl', function($scope, $location, $anchorScroll, $document, $timeout,
-    AppManager, $window, auth, $http, $state, $mdDialog, md5) {
+    AppManager, $window, auth, $http, $state, $mdDialog, md5, $filter) {
     var token = auth.getToken()
     $scope.isLoggedIn = (token != undefined)
-
+      // $scope.userName = SharedService.sharedObject
     if ($scope.isLoggedIn) {
       $scope.user_id = auth.getToken().user_id
       $scope.access_token = auth.getToken().access_token
@@ -51,9 +51,10 @@
     }
 
     $scope.search = function(lat, long, offset) {
-      $scope.slickConfig1Loaded = false;
+      // $scope.slickConfig1Loaded = false;
       AppManager.getEventsByLocation(lat, long, offset)
         .then(function(result) {
+          $scope.offset = result.data.offset
           $scope.data = result.data.nearby
           console.log($scope.data)
           if ($scope.data !== undefined && $scope.data !== null && $scope.data.length != 0) {
@@ -67,6 +68,7 @@
           $document.scrollToElement(someElement, 30, 2000);
         })
     }
+
     $scope.goToUser = function(user_id) {
       // console.log(event)
       // event.user_id = $scope.user_id
@@ -91,21 +93,44 @@
       // $scope.updateEvents()
     }
 
-
     $scope.updateEvents = function() {
-      // $scope.slickConfig1Loaded = false;
-      var count = $scope.data.length
-      var off = $scope.posts.data.length;
-      var n = count;
-      var data = [];
-      for (i = off; i < off + count, n > 0; ++i, n--) {
-        // console.log(count - n)
+      AppManager.getEventsByLocation($scope.lat, $scope.lng, $scope.offset)
+        .then(function(result) {
+          // console.log(result)
+          $scope.offset = result.data.offset
+          data = $scope.data = result.data.nearby
+          var l = data.length
+          console.log(data[0])
+          for (i = 0; i < l; i++) {
+            // console.log(data[i])
+            var temp = data[i].link
+            var date = $filter("date")(data[i].time * 1000, "mediumDate")
+            var shortTime = $filter("date")(data[i].time * 1000, "shortTime")
 
-        $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>New</div>')
-          // data.push($scope.data[count - n]);
-      }
+            temp = temp.split('.')
+            data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
+              // $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>'+ data[i].user_id +'</div>')
+              // ng-click="goToUser('+data[i].user_id+')"
+            $scope.slickConfig2.method.slickAdd(
+                '<div class="item"><a href="/calendar/' + data[i].user_id + '"><img class="cro-image" src="' + data[i].link + '"' + 'onerror="this.src=\'http://placehold.it/350x150\'" height="200px" width="300px" alt="" ></a>' + '<img class="img-responsive user-img img-circle" src="' + $scope.baseurl + data[i].avatar + '" height="50px" width="50px" alt="">' + '<div class="data">' + '<h4 class="h4-cls">' + data[i].fullname + ' </h4>' + '<h4 class="h4-cls"> ' + date + ' ' + shortTime + '</h4>' + '</div>' + '<div>{{$index}}</div>' + '</div></div>'
+              )
+              // $scope.posts.data.push(data[i])
+          }
+        })
+        // $scope.slickConfig1Loaded = false;
+        // var count = $scope.data.length
+        // var off = $scope.posts.data.length;
+        // var n = count;
+        // var data = [];
+
+      // for (i = off; i < off + count, n > 0; ++i, n--) {
+      //   // console.log(count - n)
+
+      //   $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>New</div>')
+      //     // data.push($scope.data[count - n]);
+      // }
       // $scope.posts.data = $scope.posts.data.concat(data)
-      console.log($scope.posts.data.length)
+      // console.log($scope.posts.data.length)
       // $timeout(function() {
       //   $scope.slickConfig1Loaded = true;
       // }, 5);
@@ -118,25 +143,65 @@
       lazyLoad: 'ondemand',
       // infinite: true,
       slidesToShow: 3,
-      responsive: [{
-        breakpoint: 768,
-        settings: {
-          arrows: true,
-          centerMode: true,
-          speed: 100,
-          centerPadding: '30px',
-          slidesToShow: 3
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-          arrows: true,
-          speed: 100,
+      responsive: [
+        // {
+        //   breakpoint: 768,
+        //   settings: {
+        //     arrows: true,
+        //     centerMode: true,
+        //     speed: 100,
+        //     centerPadding: '30px',
+        //     slidesToShow: 3,
+        //     swipeToSlide: true,
+        //     infinite: false
+        //   }
+        // }, {
+        //   breakpoint: 480,
+        //   settings: {
+        //     arrows: true,
+        //     speed: 100,
+        //     centerMode: false,
+        //     slidesToShow: 1,
+        //     infinite: false,
+        //     swipeToSlide: true
 
-          centerMode: false,
-          slidesToShow: 1
+        //   }
+        // }
+        {
+          breakpoint: 1024,
+          settings: {
+            arrows: true,
+            centerMode: true,
+            speed: 100,
+            centerPadding: '30px',
+            slidesToShow: 3,
+            swipeToSlide: true,
+            infinite: false
+          }
+        }, {
+          breakpoint: 600,
+          settings: {
+            arrows: true,
+            centerMode: false,
+            speed: 100,
+            // centerPadding: '30px',
+            slidesToShow: 1,
+            swipeToSlide: true,
+            infinite: false
+          }
+        }, {
+          breakpoint: 480,
+          settings: {
+            arrows: true,
+            centerMode: false,
+            speed: 100,
+            // centerPadding: '30px',
+            slidesToShow: 1,
+            swipeToSlide: true,
+            infinite: false
+          }
         }
-      }],
+      ],
       // method : function(event, slick){
       //   console.log("<div>New</div>")
       //   return slick.slickAdd("<div>New</div>")
@@ -159,7 +224,7 @@
 
     $scope.nextIndex = function() {
       $scope.currentIndex++;
-       var a = $scope.currentIndex + 2
+      var a = $scope.currentIndex + 3
       if (a % 9 == 0) {
         $scope.updateEvents()
       }

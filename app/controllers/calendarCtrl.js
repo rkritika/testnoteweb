@@ -1,20 +1,35 @@
-(function() {
+(function() { 
   var app = angular.module('myApp')
-  app.controller('myCtrl', function($scope, $location, auth, $anchorScroll, $rootScope, $document,$window, AppManager, $http, $state, $stateParams) {
+  app.controller('myCtrl', function($scope, $location, auth, $anchorScroll, $rootScope, $document, $window, AppManager, $http, $state, $stateParams) {
     var token = auth.getToken()
     console.log(token)
+    console.log(token.user_id)
+    $scope.user_id = token.user_id
+    console.log($scope.user_id)
     $scope.isLoggedIn = (token != undefined)
     console.log($scope.isLoggedIn)
     console.log($stateParams.id)
     $scope.id = $stateParams.id
     $scope.logout = function() {
-      console.log('hi')
+        console.log('hi')
         auth.logout()
         $scope.isLoggedIn = false
         $location.path('/')
       }
+      $scope.user= {}
       // console.log($stateParams)
       // console.log('myCtrl')
+      $scope.baseUrl = 'http://api.gotimenote.com/'
+    AppManager.getUserProfile($scope.id)
+      .then(function(result) {
+        $scope.user = {
+          fullname: result.user.fullname,
+          avatar: result.user.avatar,
+          follow_count: result.user.follow_count,
+          followers_count: result.user.followers_count
+        }
+        console.log($scope.user)
+      })
     $scope.today = function() {
       var date = $rootScope.selectedDate = $scope.dt = new Date();
       var minDate = $scope.minDate = $rootScope.minDate = new Date(date.getFullYear(), date.getMonth(), 1);

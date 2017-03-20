@@ -66,33 +66,10 @@
 
           controller: 'eventCtrl'
         })
-        // .state('calendar', {
-        //   url: '/calendar',
-        //   views: {
-        //     '': { templateUrl: './app/templates/calendar.html' },
-        //       'nav@calendar': { templateUrl: './app/templates/nav.html' },
-        //       'body@calendar': { templateUrl: './app/templates/calendarBody.html' },
-        //       'sideNav@calendar': { templateUrl: './app/templates/sideNav.html' }
-        //   }
-        // })
 
-      $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-      });
-
-
-
-
-      //  $provide.decorator('$state', function($delegate, $stateParams) {
-      //     $delegate.forceReload = function() {
-      //         return $delegate.go($delegate.current, $stateParams, {
-      //             reload: true,
-      //             inherit: false,
-      //             notify: true
-      //         });
-      //     };
-      //     return $delegate;
+      // $locationProvider.html5Mode({
+      //   enabled: false,
+      //   requireBase: false
       // });
 
 
@@ -111,14 +88,5 @@
         }
       });
     }])
-    // .directive('disableTap', function($timeout) {
-    //   return {
-    //     link: function() {
 
-    //       $timeout(function() {
-    //         document.querySelector('.pac-container').setAttribute('data-tap-disabled', 'true')
-    //       }, 500);
-    //     }
-    //   };
-    // });
 })()

@@ -9,7 +9,7 @@
         // console.log(user_id)
         // console.log(max_date)
         // console.log(min_date)
-        payload.append('data', '{"user_id":"'+user_id+'","max_date":"' + max_date + '","min_date":"' + min_date + '"}');
+        payload.append('data', '{"user_id":"' + user_id + '","max_date":"' + max_date + '","min_date":"' + min_date + '"}');
         $http({
             url: 'https://api.gotimenote.com/user/get_profile_website',
             method: 'POST',
@@ -20,7 +20,7 @@
           .then(_success, _error)
 
         function _success(data) {
-          // console.log(data.data.data)
+          console.log(data.data)
           deferred.resolve(data.data.data);
         }
 
@@ -62,7 +62,7 @@
         var deferred = $q.defer();
         var payload = new FormData();
 
-        payload.append('data', '{ "offset" : "'+offset+'" , "latitude" : "'+lat+'" , "longitude" : "'+long+'"}');
+        payload.append('data', '{ "offset" : "' + offset + '" , "latitude" : "' + lat + '" , "longitude" : "' + long + '"}');
 
         $http({
             url: 'http://api.gotimenote.com/user/get_nearby_chatbot/',
@@ -77,6 +77,33 @@
           console.log(data.data)
             // var access_token = data.data.data.access_token
           deferred.resolve(data.data);
+        }
+
+        function _error(err) {
+          deferred.reject(err);
+        }
+
+        return deferred.promise;
+      },
+      getUserProfile: function(user_id) {
+        var deferred = $q.defer();
+        var payload = new FormData();
+
+        payload.append('data', '{ "user_id" : "' + user_id + '"}');
+
+        $http({
+            url: 'http://api.gotimenote.com/user/get_user_website',
+            method: 'POST',
+            data: payload,
+            headers: { 'Content-Type': undefined },
+            transformRequest: angular.identity
+          })
+          .then(_success, _error)
+
+        function _success(data) {
+          console.log(data.data)
+            // var access_token = data.data.data.access_token
+          deferred.resolve(data.data.data);
         }
 
         function _error(err) {

@@ -293,6 +293,7 @@ ul.banner-social-buttons {
 @media(max-width:1199px) {
   ul.banner-social-buttons {
     margin-top: 15px;
+    display: inline-block;
   }
 }
 
@@ -494,7 +495,7 @@ h2.heading-result {
   display: block;
   padding: 0px;
   margin-top: 30px;
-  background-color: #fff;
+  /*background-color: #fff;*/
   color: #777777;
   height: 40px;
   width: 25px;
@@ -561,7 +562,7 @@ h2.heading-result {
 
 .follo {
   display: block;
-  margin-top: 15px;
+  margin-top: 0px;
   left: 42px;
 }
 
@@ -619,6 +620,11 @@ h2.heading-result {
 
 .btn-group {
   top: 30px !important;
+}
+.first-image{
+height: 161px;
+ width:221px;
+ margin:0 auto;
 }
 
 .btn-group-sm>.btn,
@@ -709,7 +715,7 @@ h2.heading-result {
 .event-time {
   font-weight: 300;
   color: #AAAAAA;
-  margin-top: 50px;
+  margin-top: 13px;
 }
 
 .comment {
@@ -731,6 +737,14 @@ h2.heading-result {
   .input-group-btn:last-child>.btn-group {
     margin-top: 15px;
   }
+
+.navbar-brand {
+    margin-bottom: 5px;
+    /*padding: 5px 15px;*/
+    padding: 7px 7px;
+}
+
+
   .nav>li>a {
     position: relative;
     display: block;
@@ -743,6 +757,15 @@ h2.heading-result {
   .well {
     margin-top: 50px;
   }
+
+.hc-icon {
+    top: 5px;
+    display: inline-flex;
+  }
+  /*.sidebar-xyz{
+    width:39.4%;
+  }*/
+
 }
 
 @media only screen and (min-device-width:768px) {
@@ -759,10 +782,10 @@ h2.heading-result {
     right: 0px;
     left: 0px;
   }
-  .hc-icon {
+/*  .hc-icon {
     top: 100px;
     display: inline-flex;
-  }
+  }*/
   /*.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
      margin-top: 15px;   
 }
@@ -879,6 +902,12 @@ h2.heading-result {
   .loading {
     margin-bottom: 150px;
   }
+  .event-time {
+    text-align: center;
+}
+.event-name{
+  text-align: center;
+}
 }
 
 
@@ -1187,6 +1216,9 @@ h2.heading-result {
     width: 400px;
     margin: 200px auto;
   }
+
+
+
 }
 
 .modal-header {

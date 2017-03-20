@@ -8,8 +8,8 @@
         <a class="navbar-brand page-scroll href="/">
           <a class="navbar-brand" href="/"><img class="img-responsive" src="../assets/images/timenote_logo.png" alt=""></a> <span class="light">Timenote</span>
         </a> -->
-      <div class="navbar-brand page-scroll" href="/" >
-          <a class="navbar-brand" href="/"><img class="img-responsive" src="../assets/images/timenote_logo.png" alt=""> <span class="light">Timenote</span> </a>
+      <div class="navbar-brand page-scroll" href="/#/" >
+          <a class="navbar-brand" href="/#/"><img class="img-responsive" src="../assets/images/timenote_logo.png" alt=""> <span class="light">Timenote</span> </a>
         </div>
       </div>
 
@@ -27,7 +27,7 @@
             <a class="page-scroll" href="">Explore</a>
           </li>
           <li>
-            <a class="page-scroll" ui-sref="calendar({id: id})">My Calendar</a>
+            <a class="page-scroll" ui-sref="calendar({id: user_id})">My Calendar</a>
           </li>
           <!-- <li> -->
 <!--             <a class="page-scroll" href="">Jobs</a>
@@ -51,22 +51,22 @@
     <div class="box">
       <div class="row">
         <!-- sidebar -->
-        <div class="column col-lg-3 col-sm-5" id="sidebar">
+        <div class="column col-lg-3 col-sm-5 sidebar-xyz" id="sidebar">
           <div class="col-md-offset-2 col-md-6 text-center">
-            <a class="logo" href="#"><img src="../assets/images/user.png" class="img-circle"></a>
+            <a class="logo" href="#"><img ng-src="{{baseUrl+user.avatar}}" class="img-circle" style="width:81px;"></a>
           </div>
-          <div class="col-md-4">
-            <a class="share" href="#"><img src="../assets/images/share.png" class=""></a>
+          <!-- <div class="col-md-4">
+            <a class="share" href="#"><img ng-src="{{baseUrl+user.avatar}}" class=""></a>
+          </div> -->
+          <div class="col-md-12 text-center profile-name" >
+            <h3>{{user.fullname}}</h3>
           </div>
-          <div class="col-md-12 text-center profile-name">
-            <h3>Ronny</h3>
+          <div class="col-md-6 col-sm-6 follo">
+            <h5>{{user.follow_count}}</h5>
+            <p>Follow</p>
           </div>
-          <div class="col-md-6 col-sm-12 follo">
-            <h5>568</h5>
-            <p>Followers</p>
-          </div>
-          <div class="col-md-6 col-sm-12 follo">
-            <h5>568</h5>
+          <div class="col-md-6 col-sm-6 follo">
+            <h5>{{user.followers_count}}</h5>
             <p>Followers</p>
           </div>
           <div class="btn-group col-md-12 col-sm-12">

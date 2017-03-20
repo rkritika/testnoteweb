@@ -60,6 +60,7 @@
       var selectedDate = Date.parse(newVal.selectedDate) / 1000
       if (selectedDate >= minDate && selectedDate <= maxDate) {
         console.log('month')
+        // $scope.assignDate()
       } else {
         console.log('getEventsforTwoMonths')
         getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
@@ -71,10 +72,23 @@
       $scope.assignDate();
     });
     $scope.assignDate = function() {
+      console.log($rootScope.selectedDate)
+      // $scope.selectedDate = $rootScope.data.selectedDate
+      // console.log("-------------------------")
+      // console.log($rootScope.data.selectedDate)
       // console.log($rootScope.selectedDate)
-      $scope.selectedDate = $rootScope.data.selectedDate
+      // getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
+      // .then(function(result){
+      //   getEvents(result)
+      // })
+      
+      // var date = $filter("date")(selectedDate, "yyyy-MM-dd")
+      // var ddd = $filter("date")(selectedDate, "w")
+      // assignData($scope.EventsList, date)
         // console.log($filter("date")($scope.selectedDate, "MMM d, y h:mm:ss a Z"))
     }
+
+
 
     $scope.selectedIndex = 0;
     var numFmt = function(num) {
@@ -114,7 +128,7 @@
             var a = '<p style="overflow: hidden; text-overflow: ellipsis; max-width:160px; white-space:nowrap; font-size: 13px;" ng-click="">' + temp[i].time + '<br>' + temp[i].name + '</p>'
               // console.log(data)
             data = data.toString() + a.toString();
-            console.log(data)
+            // console.log(data)
           }
         }
         // console.log(data)

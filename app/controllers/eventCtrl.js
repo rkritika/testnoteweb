@@ -1,4 +1,4 @@
-(function() {
+(function() { 
   var app = angular.module('myApp')
   app.controller('eventCtrl', function($scope, $location, AppManager, $http, $state, $filter, _, $rootScope, $stateParams) {
 
@@ -9,6 +9,10 @@
     console.log($stateParams)
     $scope.data = $stateParams.event
     $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
+
+    // var addMyCalendar = function(data){
+      
+    // }
     // var data = $scope.data.time
     // // var time = $scope.data.time
     // // var date = new Date(date * 1000);

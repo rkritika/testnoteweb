@@ -1,10 +1,11 @@
 (function() {
   var app = angular.module('myApp')
-  app.controller('dayCtrl', function($scope, $location, $anchorScroll, $document, AppManager, $http, $state, $rootScope, _, $filter, cfpLoadingBar, $stateParams) {
+  app.controller('dayCtrl', function($scope, $location, $anchorScroll, $document, AppManager, $http, $state, $rootScope, _, $filter, cfpLoadingBar, $stateParams, Data) {
     $scope.user_id = $stateParams.id
     console.log($stateParams.id)
     $scope.events = []
-    // return false;
+      // return false;
+      $scope.userName = {}
 
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       console.log('user_id, max_date, min_date')
@@ -15,7 +16,10 @@
           $("#BodyField").fadeOut();
           $scope.events = []
             // cfpLoadingBar.complete()
-          console.log(result)
+          // $scope.userName = { value: result.timers[0].user_username }
+          // console.log($scope.userName)
+          // Data.setdata({key: $scope.userName});
+          // console.log(Data.getdata())
           var events = result.timers
           if (events.length != 0) {
             var count = 0
@@ -120,15 +124,12 @@
     }
 
     function assignData(data, date) {
-      // console.log('hi')
-
       angular.forEach(data, function(value, key) {
           if (key === date) {
             var ev = data[key]
             console.log(ev)
             if (ev.length != 0) {
               $scope.events = ev
-                // console.log(ev)
             }
           }
         })
