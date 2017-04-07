@@ -57,6 +57,33 @@
 
         return deferred.promise;
       },
+      saveEvent: function(username,user_id,event_id,access_token){
+        var deferred = $q.defer();
+        var payload = new FormData();
+
+        payload.append('data', '{"username":"' + username + '","user_id":"' + user_id + '","event_id":"'+event_id+'","access_token":"'+access_token+'"}');
+
+        $http({
+            url: 'https://api.gotimenote.com/user/keep_timenote_website',
+            method: 'POST',
+            data: payload,
+            headers: { 'Content-Type': undefined },
+            transformRequest: angular.identity
+          })
+          .then(_success, _error)
+
+        function _success(data) {
+          console.log(data.data.data.access_token)
+            // var access_token = data.data.data.access_token
+          deferred.resolve(data.data);
+        }
+
+        function _error(err) {
+          deferred.reject(err);
+        }
+
+        return deferred.promise;
+      },
       getEventsByLocation: function(lat, long, offset) {
         console.log(lat, long, offset)
         var deferred = $q.defer();

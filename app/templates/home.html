@@ -1,7 +1,7 @@
 <div ng-controller="homeCtrl">
   <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container">
-      <div class="navbar-header" >
+      <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
@@ -43,7 +43,7 @@
           </li>
         </ul>
       </div>
-      <!-- /.navbar-collapse -->
+      <!-- /.navbar-collapse --> 
     </div>
     <!-- /.container -->
   </nav>
@@ -103,6 +103,41 @@
             </div>
             <!-- <button ng-click="">slickAdd()</button> -->
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="re-demo">
+    <div class="container" ng-if="noDataResult">
+      <div class="row">
+        <div class="span12">
+          <h2 class="heading-result">No Search Results</h2>
+          <!-- <div class="container">
+            <div class="content">
+              <div layout="row" layout-align="center center">
+                <div flex="15" style="margin-right: 14px;"><a href="" class="left" ng-click="prevIndex()"><span class="glyphicon glyphicon-menu-left" ></span></a></div>
+                <div>
+                  <slick class="slider" lazy-load="ondemand" settings="slickConfig2" ng-if="slickConfig1Loaded" init-onload="true" next-arrow=".right" prev-arrow=".left" ng-cloak>
+                    <div  ng-repeat="i in posts.data track by $index">
+                      <div class="item" ng-click="goToUser(i.user_id)">
+                        <img class="cro-image" ng-src="{{ i.link }}" onerror="this.src='http://placehold.it/350x150'" height="200px" width="300px" alt="" ng-click="goToUser(i.user_id)">
+                        <img class="img-responsive user-img img-circle" ng-src="{{ baseurl+i.avatar }}" height="50px" width="50px" alt="">
+                        <div class="data">
+                          <h4 class="h4-cls">{{ i.fullname }} </h4>
+                          <h4 class="h4-cls"> {{ i.time*1000 | date:'mediumDate' }} {{ i.time*1000 | date:'shortTime' }} </h4>
+                        </div>
+                        <div>
+                          {{$index}}
+                        </div>
+                      </div>
+                    </div>
+                  </slick>
+                </div>
+                <div flex="15" style="margin-left: 14px;"><a href="" class="right" style="float:right" ng-click="nextIndex()"><span class="glyphicon glyphicon-menu-right"></span></a></div>
+              </div> 
+            </div> -->
+            <!-- <button ng-click="">slickAdd()</button> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>

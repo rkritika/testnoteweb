@@ -51,17 +51,22 @@
     }
 
     $scope.search = function(lat, long, offset) {
-      // $scope.slickConfig1Loaded = false;
+      $scope.slickConfig1Loaded = false;
+      $scope.noDataResult = false;
+      console.log($scope)
       AppManager.getEventsByLocation(lat, long, offset)
         .then(function(result) {
+          console.log("---------")
+          console.log(result)
           $scope.offset = result.data.offset
           $scope.data = result.data.nearby
           console.log($scope.data)
           if ($scope.data !== undefined && $scope.data !== null && $scope.data.length != 0) {
-            $scope.getEvents(result.data.nearby)
-
+            // $scope.getEvents(result.data.nearby)
+            $scope.getEvents($scope.data)
           } else {
             console.log('no data')
+            $scope.noDataResult = true;
           }
           var someElement = angular.element(document.getElementById('demo'));
           // console.log(someElement)
@@ -80,16 +85,30 @@
     $scope.baseurl = 'http://api.gotimenote.com/'
 
     $scope.getEvents = function(data) {
+      console.log("Get Events Running")
       $scope.slickConfig1Loaded = true;
+      var l = $scope.data.length
+      // var l = data.length
+      console.log($scope.posts.data)      
+      // $scope.posts.data = {};
 
-      var l = data.length
-      for (i = 0; i < l; i++) {
-        // console.log(data[i])
-        var temp = data[i].link
-        temp = temp.split('.')
-        data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
-        $scope.posts.data.push(data[i])
+      console.log(l)
+      // console.log($scope.posts.data)
+      if($scope.posts.data.length !== 0)
+      {
+        $scope.posts.data = []
+        console.log("loaded")
+        console.log($scope.posts.data)
+
       }
+      for (var i = 0; i < l; i++) {
+        // console.log(data[i])
+        var temp = $scope.data[i].link
+        temp = temp.split('.')
+        $scope.data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
+        $scope.posts.data.push($scope.data[i])
+      }
+      console.log($scope.posts.data)
       // $scope.updateEvents()
     }
 
@@ -136,6 +155,7 @@
       // }, 5);
     }
     $scope.currentIndex = 0;
+    
     $scope.slickConfig2 = {
       centerMode: true,
       centerPadding: '60px',
@@ -279,19 +299,21 @@
         AppManager.login(user, pass)
           .then(function(result) {
             console.log(result)
+            console.log("userName "+user)
             var result = result
             if (result.success === "true") {
               var access_token = result.data.access_token
               var user_id = result.data.user_id
               var token = {
                 access_token: access_token,
-                user_id: user_id
+                user_id: user_id,
+                username: user
               }
-              auth.setToken(token)
+              return auth.setToken(token)
             } else {
               console.log('Invalid username/password')
             }
-            return result
+            // return result
           })
           .then(function(result) {
             $scope.answer(JSON.stringify(result))

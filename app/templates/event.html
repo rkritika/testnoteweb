@@ -39,7 +39,7 @@
           <h3 class="oct ">{{data.time}}</h3>
         </div>
         <div class="col-md-offset-4 col-md-1 ">
-          <a class="btn btn-default save-btn" ng-click="">Save</a>
+          <a class="btn btn-default save-btn" ng-click="showAdvanced(data)">Save</a>
        </div>
       </div>
       <div class="row ">
@@ -54,6 +54,18 @@
         </div>
       </div>
     </div>
+    <script type="text/ng-template" id="savedialog.html">
+      <md-dialog>
+          <!-- <h4 class="modal-title" ng-if="myCalFlag">You need to login to view the calendar</h4> -->
+          <div layout="column" layout-align="center center" style="padding: 2rem 7rem">
+            <div layout-gt-sm="row" class="inputdemoErrorsAdvanced" style="padding-bottom: 1.3rem">
+              <h3>Are you sure you want to save this event?</h3>
+            </div>
+            <md-button md-no-ink="" class="md-primary" ng-click="save(data)">Save</md-button>            
+            <md-button md-no-ink="" class="md-primary" ng-click="cancel()">Cancel</md-button>
+          </div>
+      </md-dialog>
+    </script>
     <!-- /col-9 -->
   
 <!-- /main -->

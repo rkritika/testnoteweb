@@ -2,13 +2,10 @@
   var app = angular.module('myApp')
   app.controller('myCtrl', function($scope, $location, auth, $anchorScroll, $rootScope, $document, $window, AppManager, $http, $state, $stateParams) {
     var token = auth.getToken()
-    // console.log(token)
-    // console.log(token.user_id)
     if(token != undefined)
     {
       $scope.user_id = token.user_id
     }
-    // console.log($scope.user_id)
     $scope.isLoggedIn = (token != undefined)
     // console.log($scope.isLoggedIn)
     // console.log($stateParams.id)
@@ -109,10 +106,11 @@
       $rootScope.data.maxDate = new Date(new Date(date.getFullYear(), date.getMonth() + 2, 0).setHours(23, 59, 59));
     })
 
-    // $rootScope.$watch('selectedDate', function(newVal, oldVal) {
-    //   var date = $rootScope.selectedDate
-    //   $scope.dt = date
-    // })
+    $rootScope.$watch('selectedDate', function() {
+      // $window.reload();
+      var date = $rootScope.selectedDate
+      $scope.dt = date
+    })
 
 
 

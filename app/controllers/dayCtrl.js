@@ -4,8 +4,8 @@
     $scope.user_id = $stateParams.id
     console.log($stateParams.id)
     $scope.events = []
-      // return false;
-      $scope.userName = {}
+    // return false;
+    $scope.userName = {}
 
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       console.log('user_id, max_date, min_date')
@@ -100,6 +100,7 @@
         if (selectedDate >= minDate && selectedDate <= maxDate) {
           // console.log('assignDate')
           // console.log(minDate, maxDate, selectedDate)
+          $scope.date = selectedDate;
           $scope.assignDate()
         } else {
           $scope.events = []
@@ -128,6 +129,13 @@
           if (key === date) {
             var ev = data[key]
             console.log(ev)
+            console.log("------")
+            console.log(key.substring(5,7))
+            // console.log(data.month)
+            var a = parseInt(key.substring(5,7)) - 1;            
+            $rootScope.currentMonth = a;
+            console.log("Current Month"+ $rootScope.currentMonth)
+
             if (ev.length != 0) {
               $scope.events = ev
             }

@@ -1,15 +1,83 @@
 (function() { 
   var app = angular.module('myApp')
-  app.controller('eventCtrl', function($scope, $location, AppManager, $http, $state, $filter, _, $rootScope, $stateParams) {
+  app.controller('eventCtrl', function($scope, $location, AppManager, $http, $state, auth, $window, $filter, _, $rootScope, $stateParams, $mdDialog) {
 
     // console.log($stateParams.eventId)
     // console.log($stateParams.id)
     $scope.imgheart = '../../assets/images/ic_heart.png'
     $scope.imgcomment = '../../assets/images/ic_comments.png'
     console.log($stateParams)
+    console.log(auth)
     $scope.data = $stateParams.event
     $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
 
+    $scope.showAdvanced = function(ev) {
+
+      $mdDialog.show({
+          controller: SaveController,
+          templateUrl: 'savedialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function(answer) {
+          //$window.location.reload()
+          // $scope.status = 'You said the information was \n"' + answer;
+          // console.log($scope.status)
+        }, function() {
+          //$scope.status = 'You cancelled the dialog.';
+          // console.log($scope.status)
+          //console.log($scope.status)
+
+        });
+    };
+
+    function SaveController($scope, $mdDialog, auth) {
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+      //console.log(auth.isLoggedIn())
+
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+
+      // $scope.answer = function(answer) {
+      //   $mdDialog.hide(answer);
+      // };
+
+      $scope.save = function(data) {
+        // var pass = md5.createHash(password)
+        var user_id = auth.getToken().user_id;
+        var username =  auth.getToken().username;
+        console.log(auth)
+        var access_token = auth.getToken().access_token;
+        console.log(user_id)
+        console.log(access_token)
+        var auth1 = auth.getToken()
+        console.log(auth1)
+        var event_id = $stateParams.event.id;
+        console.log(event_id)
+        AppManager.saveEvent(username, user_id, event_id, access_token)
+        .then(function(result) {
+          console.log(result)
+          var result = result
+          if (result.success === "true") {
+            $mdDialog.cancel();
+            console.log("Successfully saved")            
+          } else {
+            console.log('Not Logged In')
+          }
+          // return result
+        })
+        // .then(function(result) {
+          //$scope.answer(JSON.stringify(result))
+        // })
+      }
+
+
+    }
     // var addMyCalendar = function(data){
       
     // }
