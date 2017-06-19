@@ -13,7 +13,7 @@
       $scope.lat = $stateParams.lat
       $scope.lng = $stateParams.long
       $scope.address = $stateParams.address
-      // findEvents($scope.lat, $scope.lng, 0)
+      findEvents($scope.lat, $scope.lng, 0)
     }
     $scope.posts = {
       data: []
