@@ -81,7 +81,8 @@
           controller: 'eventCtrl',
           data: {
               meta: {
-                'title': 'Event'
+                'title': 'Event',
+                'description': 'Visit timenote.com'
               }
             }
         })
