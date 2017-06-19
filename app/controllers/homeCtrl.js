@@ -20,7 +20,7 @@
     };
     $scope.posts.data = eventHandler.getEvents()
     console.log($scope.posts.data)
-    if ($scope.posts.data.length != 0 || $scope.posts.data.length != undefined) {
+    if ($scope.posts.data.length != 0 || $scope.posts.data != undefined) {
       $scope.slickConfig1Loaded = true;
       var address = eventHandler.getAddress()
       $scope.lat = address.lat;
@@ -31,7 +31,6 @@
       console.log($scope.lat)
       console.log($scope.lng)
       console.log($scope.offset)
-
     }
     // $scope.isEventStored = eventHandler.getEvents()
     // if($scope.isEventStored){
