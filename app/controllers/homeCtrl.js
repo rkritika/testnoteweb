@@ -18,19 +18,22 @@
     $scope.posts = {
       data: []
     };
-    console.log($scope.posts.data)    
     $scope.posts.data = eventHandler.getEvents()
-    if ($scope.posts.data.length != 0 || $scope.posts.data != undefined) {
-      $scope.slickConfig1Loaded = true;
-      var address = eventHandler.getAddress()
-      $scope.lat = address.lat;
-      $scope.lng = address.lng;
-      $scope.offset = address.offset;
-      $scope.data = $scope.posts.data
-      console.log(address)
-      console.log($scope.lat)
-      console.log($scope.lng)
-      console.log($scope.offset)
+    
+    console.log($scope.posts.data)    
+    if ($scope.posts.data != undefined) {
+      if ($scope.posts.data.length != 0) {
+        $scope.slickConfig1Loaded = true;
+        var address = eventHandler.getAddress()
+        $scope.lat = address.lat;
+        $scope.lng = address.lng;
+        $scope.offset = address.offset;
+        $scope.data = $scope.posts.data
+        console.log(address)
+        console.log($scope.lat)
+        console.log($scope.lng)
+        console.log($scope.offset)
+      }      
     }
     // $scope.isEventStored = eventHandler.getEvents()
     // if($scope.isEventStored){
