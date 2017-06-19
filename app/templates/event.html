@@ -1,15 +1,15 @@
 <div class="padding" ng-controller="eventCtrl">
-  <div class="full col-sm-9">
-    <!-- content -->
-    <!--/top story-->
-    <div class="row">
-      <div class="text-center day-hr">
-        <h5>DAY</h5>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 cook-img">
-        <img class="img-responsive" ng-src="{{baseurl+data.link}}" style="height:auto; alt=" ">
+    <div class="full col-sm-9">
+        <!-- content -->
+        <!--/top story-->
+        <div class="row">
+            <div class="text-center day-hr">
+                <h5>DAY</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 cook-img">
+                <img class="img-responsive" ng-src="{{baseurl+data.link}}" style="height:auto; alt=" ">
         </div>
       </div>
       <div class="row ">
@@ -38,9 +38,11 @@
         <div class="col-md-2 ">
           <h3 class="oct ">{{data.time}}</h3>
         </div>
-        <div class="col-md-offset-4 col-md-1 ">
-          <a class="btn btn-default save-btn" ng-click="showAdvanced(data)">Save</a>
-       </div>
+        <div class="col-md-offset-1 col-md-3 ">
+          <a class="btn btn-default save-btn " ng-click="showAdvanced(data)" style="background-color: #2b904f; color: white; margin-right: 20px; ">Save</a>
+          <!-- <a class="btn btn-default save-btn " ng-click="share(data) " style="background-color: #3b5998; color:#fff "><md-icon md-font-icon="android " aria-label="android "></md-icon> Share</a> -->          
+          <a href="#" class="btn btn-default save-btn" style="background-color: #3b5998; color:#fff" socialshare socialshare-provider="facebook" socialshare-url="{{baseurl+data.link}}"> Share </a>
+       </div>       
       </div>
       <div class="row ">
         <div class="col-md-6 ">
@@ -54,15 +56,15 @@
         </div>
       </div>
     </div>
-    <script type="text/ng-template" id="savedialog.html">
+    <script type="text/ng-template " id="savedialog.html ">
       <md-dialog>
-          <!-- <h4 class="modal-title" ng-if="myCalFlag">You need to login to view the calendar</h4> -->
-          <div layout="column" layout-align="center center" style="padding: 2rem 7rem">
-            <div layout-gt-sm="row" class="inputdemoErrorsAdvanced" style="padding-bottom: 1.3rem">
+          <!-- <h4 class="modal-title " ng-if="myCalFlag ">You need to login to view the calendar</h4> -->
+          <div layout="column " layout-align="center center " style="padding: 2rem 7rem ">
+            <div layout-gt-sm="row " class="inputdemoErrorsAdvanced " style="padding-bottom: 1.3rem ">
               <h3>Are you sure you want to save this event?</h3>
             </div>
-            <md-button md-no-ink="" class="md-primary" ng-click="save(data)">Save</md-button>            
-            <md-button md-no-ink="" class="md-primary" ng-click="cancel()">Cancel</md-button>
+            <md-button md-no-ink=" " class="md-primary " ng-click="save(data) ">Save</md-button>            
+            <md-button md-no-ink=" " class="md-primary " ng-click="cancel() ">Cancel</md-button>
           </div>
       </md-dialog>
     </script>

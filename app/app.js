@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5'])
+  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5', '720kb.socialshare'])
     .value('duScrollDuration', 4000)
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
 
@@ -7,7 +7,21 @@
 
       $stateProvider
         .state('home', {
+          params: {
+            lat: null,
+            long: null,
+            address: null
+          },
           url: '/',
+          views: {
+            '': {
+              templateUrl: './app/templates/home.html'
+            }
+          },
+          controller: 'homeCtrl'
+        })
+        .state('dashboard', {
+          url: '/:address',
           views: {
             '': {
               templateUrl: './app/templates/home.html'
@@ -17,7 +31,7 @@
         })
         .state('calendar', {
           // abstract: true,
-          url: '/calendar/:id',
+          url: '/calendar/:id/:date',
           views: {
             '': {
               templateUrl: '../app/templates/calendar.html'

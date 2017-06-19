@@ -1,8 +1,8 @@
 <div ng-controller="myCtrl">
-  <nav class="navbar navbar-custom2 navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-custom2 navbar-fixed-top" role="navigation" style="z-index: 100">
     <div class="container">
       <div class="navbar-header">
- <!--        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+        <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
         <a class="navbar-brand page-scroll href="/">
@@ -21,16 +21,23 @@
             <a href="#page-top"></a>
           </li>
           <li>
-            <a href=""><i class="fa fa-search nav-search" aria-hidden="true"></i></a>
+            <!-- <a href=""><i class="fa fa-search nav-search" aria-hidden="true"></i></a> -->
+            <form id="loc-search">
+              <!-- <a href=""><i class="fa fa-search nav-search" aria-hidden="true"></i></a> -->
+              <input type="search" placeholder="Search" type="text" gm-places-autocomplete placeholder="Search your location" ng-model="autocomplete" required>
+              <!-- <input type="text"> -->
+              <!-- <a href="" ng-click="show();"><img class="img-responsive loc" src="assets/images/ic_add_location.png" alt=""></a> -->
+            </form>
+            <!-- <button class="" type="submit" ><i class="fa fa-search fa-lg" aria-hidden="true"></i><input type="search" placeholder="Search"></button> -->
           </li>
-          <li>
+          <!-- <li>
             <a class="page-scroll" href="">Explore</a>
-          </li>
+          </li> -->
           <li>
             <a class="page-scroll" ui-sref="calendar({id: user_id})">My Calendar</a>
           </li>
           <!-- <li> -->
-<!--             <a class="page-scroll" href="">Jobs</a>
+          <!--<a class="page-scroll" href="">Jobs</a>
           </li>
           <li>
             <a class="page-scroll" href="">Press</a>

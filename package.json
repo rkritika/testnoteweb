@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "angular-md": "^1.0.0",
     "angular-md5": "^0.1.10",
+    "angular-socialshare": "^2.3.8",
     "express": "^4.14.0",
     "underscore": "^1.8.3"
   }

@@ -9,6 +9,41 @@
     $scope.isLoggedIn = (token != undefined)
     // console.log($scope.isLoggedIn)
     // console.log($stateParams.id)
+    $scope.$on('gmPlacesAutocomplete::placeChanged', function() {
+      var location = $scope.autocomplete.getPlace().geometry.location;
+
+      var address = $scope.address = $scope.autocomplete.getPlace().formatted_address
+      var lat = $scope.lat = location.lat();
+      var lng = $scope.lng = location.lng();
+      // $scope.lng = location.getPlace();
+      console.log($scope.address)
+      $state.go('home', { lat: lat, long: lng, address: address});
+      // $location.path('/'+ $scope.address)
+      $scope.$apply();
+
+    });
+    
+    $scope.show = function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(onPositionUpdate);
+      }
+    }
+
+    function onPositionUpdate(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      $scope.lat = lat
+      $scope.lng = lng
+      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=true";
+      $http.get(url)
+        .then(function(result) {
+          var address = result.data.results[2].formatted_address;
+          $scope.autocomplete = address;
+          $scope.address = address;
+          console.log($scope.address)
+        });
+    }
+
     $scope.id = $stateParams.id
     $scope.logout = function() {
         console.log('hi')
@@ -31,7 +66,7 @@
         console.log($scope.user)
       })
     $scope.today = function() {
-      var date = $rootScope.selectedDate = $scope.dt = new Date();
+      var date = $rootScope.selectedDate = $scope.dt = new Date($stateParams.date*1000);
       var minDate = $scope.minDate = $rootScope.minDate = new Date(date.getFullYear(), date.getMonth(), 1);
       var maxDate = $scope.maxDate = $rootScope.maxDate = new Date(new Date(date.getFullYear(), date.getMonth() + 2, 0).setHours(23, 59, 59));
 

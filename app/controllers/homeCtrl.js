@@ -1,7 +1,7 @@
 (function() {
   var app = angular.module('myApp')
   app.controller('homeCtrl', function($scope, $location, $anchorScroll, $document, $timeout,
-    AppManager, $window, auth, $http, $state, $mdDialog, md5, $filter) {
+    AppManager, $window, auth, eventHandler, $http, $state, $mdDialog, md5, $filter, $stateParams) {
     var token = auth.getToken()
     $scope.isLoggedIn = (token != undefined)
       // $scope.userName = SharedService.sharedObject
@@ -9,13 +9,34 @@
       $scope.user_id = auth.getToken().user_id
       $scope.access_token = auth.getToken().access_token
     }
-
+    if ($stateParams.lat != undefined && $stateParams.long != undefined) {
+      $scope.lat = $stateParams.lat
+      $scope.lng = $stateParams.long
+      $scope.address = $stateParams.address
+      findEvents($scope.lat, $scope.lng, 0)      
+    }    
     $scope.posts = {
       data: []
     };
-    $scope.lat = undefined;
-    $scope.lng = undefined;
+    $scope.posts.data = eventHandler.getEvents()
+    console.log($scope.posts.data)
+    if ($scope.posts.data.length != 0) {
+      $scope.slickConfig1Loaded = true;
+      var address = eventHandler.getAddress()
+      $scope.lat = address.lat;
+      $scope.lng = address.lng;
+      $scope.offset = address.offset;
+      $scope.data = $scope.posts.data
+      console.log(address)
+      console.log($scope.lat)
+      console.log($scope.lng)
+      console.log($scope.offset)
 
+    }
+    // $scope.isEventStored = eventHandler.getEvents()
+    // if($scope.isEventStored){
+    //   $scope.posts.data = eventHandler.getEvents()
+    // }
     $scope.$on('gmPlacesAutocomplete::placeChanged', function() {
       var location = $scope.autocomplete.getPlace().geometry.location;
 
@@ -24,7 +45,6 @@
       $scope.lng = location.lng();
       // $scope.lng = location.getPlace();
       console.log($scope.address)
-
       $scope.$apply();
 
     });
@@ -53,8 +73,9 @@
     $scope.search = function(lat, long, offset) {
       $scope.slickConfig1Loaded = false;
       $scope.noDataResult = false;
-      console.log($scope)
-      AppManager.getEventsByLocation(lat, long, offset)
+      // console.log($scope)
+      var temp = 1;
+      AppManager.getEventsByLocation(lat, long, temp)
         .then(function(result) {
           console.log("---------")
           console.log(result)
@@ -74,10 +95,27 @@
         })
     }
 
-    $scope.goToUser = function(user_id) {
+    function findEvents() {
+      $scope.noDataResult = false;
+      AppManager.getEventsByLocation($scope.lat, $scope.lng, 1)
+        .then(function(result) {
+          $scope.offset = result.data.offset
+          $scope.data = result.data.nearby
+          if ($scope.data !== undefined && $scope.data !== null && $scope.data.length != 0) {
+            $scope.getEvents($scope.data)
+          } else {
+            console.log('no data')
+            $scope.noDataResult = true;
+          }
+          var someElement = angular.element(document.getElementById('demo'));
+          $document.scrollToElement(someElement, 30, 2000);
+        })
+    }
+
+    $scope.goToUser = function(user_id, date) {
       // console.log(event)
       // event.user_id = $scope.user_id
-      $location.path('/calendar/' + user_id)
+      $location.path('/calendar/' + user_id + '/' + date)
 
       // $state.go('calendar', { user_id: user_id });
     }
@@ -109,32 +147,46 @@
         $scope.posts.data.push($scope.data[i])
       }
       console.log($scope.posts.data)
+      eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset)
       // $scope.updateEvents()
     }
 
     $scope.updateEvents = function() {
       AppManager.getEventsByLocation($scope.lat, $scope.lng, $scope.offset)
         .then(function(result) {
-          // console.log(result)
+          console.log(result)
           $scope.offset = result.data.offset
-          data = $scope.data = result.data.nearby
-          var l = data.length
-          console.log(data[0])
-          for (i = 0; i < l; i++) {
-            // console.log(data[i])
-            var temp = data[i].link
-            var date = $filter("date")(data[i].time * 1000, "mediumDate")
-            var shortTime = $filter("date")(data[i].time * 1000, "shortTime")
-
-            temp = temp.split('.')
-            data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
-              // $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>'+ data[i].user_id +'</div>')
-              // ng-click="goToUser('+data[i].user_id+')"
-            $scope.slickConfig2.method.slickAdd(
-                '<div class="item"><a href="/calendar/' + data[i].user_id + '"><img class="cro-image" src="' + data[i].link + '"' + 'onerror="this.src=\'http://placehold.it/350x150\'" height="200px" width="300px" alt="" ></a>' + '<img class="img-responsive user-img img-circle" src="' + $scope.baseurl + data[i].avatar + '" height="50px" width="50px" alt="">' + '<div class="data">' + '<h4 class="h4-cls">' + data[i].fullname + ' </h4>' + '<h4 class="h4-cls"> ' + date + ' ' + shortTime + '</h4>' + '</div>' + '<div>{{$index}}</div>' + '</div></div>'
-              )
-              // $scope.posts.data.push(data[i])
+          console.log($scope.offset)
+          console.log($scope.data)
+          var old_length = $scope.data.length
+          for(var j=0; j < result.data.nearby.length; j++){
+            $scope.data.push(result.data.nearby[j])
+          }          
+          console.log($scope.data)      
+          var new_length = $scope.data.length    
+          // data = $scope.data = result.data.nearby
+          // console.log(data[0])          
+          if ($scope.data !== undefined && $scope.data !== null && $scope.data.length != 0) {
+            // $scope.getEvents(result.data.nearby)
+            // $scope.getEvents($scope.data)
+            for (var i = old_length; i < new_length; i++) {
+              var temp = $scope.data[i].link            
+              temp = temp.split('.')
+              $scope.data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
+              console.log($)
+                // $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>'+ data[i].user_id +'</div>')
+                // ng-click="goToUser('+data[i].user_id+')"
+              // $scope.slickConfig2.method.slickAdd(
+              //     '<div class="item"><a href="/calendar/' + data[i].user_id + '"><img class="cro-image" src="' + data[i].link + '"' + 'onerror="this.src=\'http://placehold.it/350x150\'" height="200px" width="300px" alt="" ></a>' + '<img class="img-responsive user-img img-circle" src="' + $scope.baseurl + data[i].avatar + '" height="50px" width="50px" alt="">' + '<div class="data">' + '<h4 class="h4-cls">' + data[i].fullname + ' </h4>' + '<h4 class="h4-cls"> ' + date + ' ' + shortTime + '</h4>' + '</div>' + '<div>{{$index}}</div>' + '</div></div>'
+              //   )
+                // $scope.posts.data.push(data[i])
+            }
+          } else {
+            console.log('no data')
+            $scope.noDataResult = true;
           }
+          $scope.posts.data = $scope.data
+          eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset)          
         })
         // $scope.slickConfig1Loaded = false;
         // var count = $scope.data.length
