@@ -2,7 +2,7 @@
   var app = angular.module('myApp')
   app
     .factory('eventHandler', function($localStorage) {
-      var _event;
+      var _event = [];
       var _address = {
         "lat":"",
         "lng":"",

@@ -13,13 +13,14 @@
       $scope.lat = $stateParams.lat
       $scope.lng = $stateParams.long
       $scope.address = $stateParams.address
-      findEvents($scope.lat, $scope.lng, 0)      
+      // findEvents($scope.lat, $scope.lng, 0)
     }
     $scope.posts = {
       data: []
     };
-    $scope.posts.data = eventHandler.getEvents()    
-    console.log($scope.posts.data)    
+    $scope.posts.data = eventHandler.getEvents()  
+    console.log($scope.posts.data)
+    console.log($scope.posts)
     if ($scope.posts.data != undefined) {
       if ($scope.posts.data.length != 0) {
         $scope.slickConfig1Loaded = true;
@@ -28,11 +29,7 @@
         $scope.lng = address.lng;
         $scope.offset = address.offset;
         $scope.data = $scope.posts.data
-        console.log(address)
-        console.log($scope.lat)
-        console.log($scope.lng)
-        console.log($scope.offset)
-      }      
+      }
     }
     // $scope.isEventStored = eventHandler.getEvents()
     // if($scope.isEventStored){
