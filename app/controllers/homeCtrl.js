@@ -133,12 +133,14 @@
 
       console.log(l)
       // console.log($scope.posts.data)
-      if($scope.posts.data.length !== 0)
-      {
-        $scope.posts.data = []
-        console.log("loaded")
-        console.log($scope.posts.data)
+      if ($scope.posts.data != undefined) {
+        if($scope.posts.data.length !== 0)
+        {
+          $scope.posts.data = []
+          console.log("loaded")
+          console.log($scope.posts.data)
 
+        }
       }
       for (var i = 0; i < l; i++) {
         // console.log(data[i])
