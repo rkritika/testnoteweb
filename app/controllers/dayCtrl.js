@@ -148,8 +148,9 @@
       // console.log(event)
       // event.user_id = $scope.user_id
       // $location.path('/calendar/'+$scope.user_id+ '/events/' +event.id)
-
-      $state.go('calendar.event', { event: event });
+      var url = $location.absUrl()
+      console.log(url)      
+      $state.go('calendar.event', { event: event, url: url });
     }
 
   });

@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 cook-img">
-                <img class="img-responsive" ng-src="{{baseurl+data.link}}" style="height:auto; alt=" ">
+                <img class="img-responsive" ng-src="{{data.link}}" style="height:auto; alt=" ">
         </div>
       </div>
       <div class="row ">
@@ -41,7 +41,7 @@
         <div class="col-md-offset-1 col-md-3 ">
           <a class="btn btn-default save-btn " ng-click="showAdvanced(data)" style="background-color: #2b904f; color: white; margin-right: 20px; ">Save</a>
           <!-- <a class="btn btn-default save-btn " ng-click="share(data) " style="background-color: #3b5998; color:#fff "><md-icon md-font-icon="android " aria-label="android "></md-icon> Share</a> -->          
-          <a href="#" class="btn btn-default save-btn" style="background-color: #3b5998; color:#fff" socialshare socialshare-provider="facebook" socialshare-url="{{baseurl+data.link}}"> Share </a>
+          <a href="#" class="btn btn-default save-btn" style="background-color: #3b5998; color:#fff" socialshare socialshare-provider="facebook" socialshare-url="{{url}}"> Share </a>
        </div>       
       </div>
       <div class="row ">

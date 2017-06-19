@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5', '720kb.socialshare'])
+  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5', '720kb.socialshare', 'ngMeta'])
     .value('duScrollDuration', 4000)
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
 
@@ -69,7 +69,8 @@
         })
         .state('calendar.event', {
           params: {
-            event: null
+            event: null,
+            url: null
           },
           url: '/event',
           views: {
@@ -77,8 +78,12 @@
               templateUrl: '../../../app/templates/event.html'
             }
           },
-
-          controller: 'eventCtrl'
+          controller: 'eventCtrl',
+          data: {
+              meta: {
+                'title': 'Event'
+              }
+            }
         })
 
       // $locationProvider.html5Mode({
@@ -93,8 +98,8 @@
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }])
-    .run(['$rootScope', '$state', function($rootScope, $state) {
-
+    .run(['$rootScope', '$state','ngMeta', function($rootScope, $state, ngMeta) {
+      ngMeta.init();
       $rootScope.$on('$stateChangeSuccess', function(evt, to, params) {
         if (to.redirectTo) {
           evt.preventDefault();

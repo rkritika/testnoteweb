@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('myApp')
-    app.controller('eventCtrl', function($scope, $location, AppManager, $http, $state, auth, $window, $filter, _, $rootScope, $stateParams, $mdDialog) {
+    app.controller('eventCtrl', function($scope, ngMeta, $location, AppManager, $http, $state, auth, $window, $filter, _, $rootScope, $stateParams, $mdDialog) {
 
         // Socialshare.share({
         //   'provider': 'facebook',
@@ -10,7 +10,6 @@
         //     'socialshareHashtags': '720kb, angular, socialshare'
         //   }
         // });
-
         // console.log($stateParams.eventId)
         // console.log($stateParams.id)
         $scope.imgheart = '../../assets/images/ic_heart.png'
@@ -18,21 +17,15 @@
         console.log($stateParams)
         console.log(auth)
         $scope.data = $stateParams.event
+        $scope.url = $stateParams.url
+        console.log($scope.url)        
+        // $scope.url = "http://testnotewb.herokuapp.com/#/calendar/21993/1498543200"
+        // $scope.url = "https:///#/calendar/19633/1497909600"
         $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
         // $scope.posts = [{id:1,title:"title1",content:"content1",caption:"caption1"},{id:2,title:"title2",content:"content2",caption:"caption2"}];
-        $scope.share = function(post) {
-            
-          // FB.ui(
-          // {
-          //     method: 'feed',
-          //     name: 'This is the content of the "name" field.',
-          //     link: 'http://www.hyperarts.com/external-xfbml/'+post.id,
-          //     picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
-          //     caption: post.caption,
-          //     description: 'This is the content of the "description" field, below the caption.',
-          //     message: ''
-          // });
-        }
+        ngMeta.setTitle($scope.data.name)        
+        ngMeta.setTag('image', $scope.data.link);
+        ngMeta.setTag('description', $scope.data.description);
 
         $scope.showAdvanced = function(ev) {
 
