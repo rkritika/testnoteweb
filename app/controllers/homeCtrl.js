@@ -14,12 +14,11 @@
       $scope.lng = $stateParams.long
       $scope.address = $stateParams.address
       findEvents($scope.lat, $scope.lng, 0)      
-    }    999
+    }
     $scope.posts = {
       data: []
     };
-    $scope.posts.data = eventHandler.getEvents()
-    
+    $scope.posts.data = eventHandler.getEvents()    
     console.log($scope.posts.data)    
     if ($scope.posts.data != undefined) {
       if ($scope.posts.data.length != 0) {
