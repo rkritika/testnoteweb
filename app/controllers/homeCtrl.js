@@ -14,13 +14,13 @@
       $scope.lng = $stateParams.long
       $scope.address = $stateParams.address
       findEvents($scope.lat, $scope.lng, 0)      
-    }    
+    }    999
     $scope.posts = {
       data: []
     };
     $scope.posts.data = eventHandler.getEvents()
     console.log($scope.posts.data)
-    if ($scope.posts.data.length != 0) {
+    if ($scope.posts.data.length != 0 || $scope.posts.data.length != undefined) {
       $scope.slickConfig1Loaded = true;
       var address = eventHandler.getAddress()
       $scope.lat = address.lat;
