@@ -18,8 +18,8 @@
     $scope.posts = {
       data: []
     };
+    console.log($scope.posts.data)    
     $scope.posts.data = eventHandler.getEvents()
-    console.log($scope.posts.data)
     if ($scope.posts.data.length != 0 || $scope.posts.data != undefined) {
       $scope.slickConfig1Loaded = true;
       var address = eventHandler.getAddress()
