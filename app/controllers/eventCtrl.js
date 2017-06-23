@@ -2,14 +2,6 @@
     var app = angular.module('myApp')
     app.controller('eventCtrl', function($scope, ngMeta, $location, AppManager, $http, $state, auth, $window, $filter, _, $rootScope, $stateParams, $mdDialog) {
 
-        // Socialshare.share({
-        //   'provider': 'facebook',
-        //   "type":"share",
-        //   'attrs': {
-        //     'socialshareUrl': 'http://720kb.net',
-        //     'socialshareHashtags': '720kb, angular, socialshare'
-        //   }
-        // });
         // console.log($stateParams.eventId)
         // console.log($stateParams.id)
         $scope.imgheart = '../../assets/images/ic_heart.png'
@@ -17,7 +9,9 @@
         console.log($stateParams)
         console.log(auth)
         $scope.data = $stateParams.event
-        $scope.url = $stateParams.url
+        // $scope.url = $stateParams.url
+        $scope.url = $location.absUrl();
+        // console.log($location.path())
         console.log($scope.url)        
         // $scope.url = "http://testnotewb.herokuapp.com/#/calendar/21993/1498543200"
         // $scope.url = "https:///#/calendar/19633/1497909600"
@@ -32,6 +26,23 @@
             $mdDialog.show({
                     controller: SaveController,
                     templateUrl: 'savedialog.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: true,
+                    fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+                })
+                .then(function(answer) {
+                    //$window.location.reload()
+                    // $scope.status = 'You said the information was \n"' + answer;
+                    // console.log($scope.status)
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                    // console.log($scope.status)
+                    //console.log($scope.status)
+
+                });
+            $mdDialog.show({
+                    templateUrl: 'loginerror.html',
                     parent: angular.element(document.body),
                     targetEvent: ev,
                     clickOutsideToClose: true,
