@@ -17,9 +17,9 @@
         // $scope.url = "https:///#/calendar/19633/1497909600"
         $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
         // $scope.posts = [{id:1,title:"title1",content:"content1",caption:"caption1"},{id:2,title:"title2",content:"content2",caption:"caption2"}];
-        ngMeta.setTitle($scope.data.name)        
-        ngMeta.setTag('og:image', $scope.data.link);
-        ngMeta.setTag('og:description', $scope.data.description);
+        ngMeta.setTitle($scope.data.name)
+        ngMeta.setTag('image', $scope.data.link);
+        ngMeta.setTag('description', $scope.data.description);
 
         $scope.showAdvanced = function(ev) {
 
