@@ -10,8 +10,8 @@
         console.log(auth)
         $scope.data = $stateParams.event
         // $scope.url = $stateParams.url
-        $scope.url = $location.absUrl();
-        // $scope.url = "http://localhost:3000/?_escaped_fragment_=/calendar/21993/1498543200/event"
+        // $scope.url = $location.absUrl();
+        $scope.url = "http://localhost:3000/?_escaped_fragment_=/calendar/21993/1498543200/event"
         // console.log($location.path())
         console.log($scope.url)        
         // $scope.url = "http://testnotewb.herokuapp.com/#/calendar/21993/1498543200"
@@ -21,6 +21,7 @@
         ngMeta.setTitle($scope.data.name)
         ngMeta.setTag('image', $scope.data.link);
         ngMeta.setTag('description', $scope.data.description);
+        ngMeta.setTag('url', $scope.url);
 
         $scope.showAdvanced = function(ev) {
 
