@@ -92,10 +92,9 @@
       //   enabled: false,
       //   requireBase: false
       // });
-
-
     }])
-
+    .use(require('prerender-node'));
+    .use(require('prerender-node').set('prerenderToken', 'Y9LEIzcfgF1RdnpglMLf'));
 
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
