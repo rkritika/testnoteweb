@@ -25,7 +25,8 @@
 
         $scope.showAdvanced = function(ev) {
 
-            $mdDialog.show({
+            if($scope.isLoggedIn){
+                $mdDialog.show({
                     controller: SaveController,
                     templateUrl: 'savedialog.html',
                     parent: angular.element(document.body),
@@ -43,7 +44,8 @@
                     //console.log($scope.status)
 
                 });
-            $mdDialog.show({
+            }else{
+                $mdDialog.show({
                     templateUrl: 'loginerror.html',
                     parent: angular.element(document.body),
                     targetEvent: ev,
@@ -60,11 +62,17 @@
                     //console.log($scope.status)
 
                 });
+            }
+            
+            
         };
 
         function SaveController($scope, $mdDialog, auth) {
             $scope.hide = function() {
+                console.log("HIDE1")
+
                 $mdDialog.hide();
+
             };
             //console.log(auth.isLoggedIn())
 
