@@ -2,7 +2,7 @@
   var app = angular.module('myApp')
   app.controller('weekCtrl', function($scope, $location, $anchorScroll, $document, AppManager, $http, $state, $filter, _, $rootScope, $stateParams) {
     $scope.user_id = $stateParams.id
-    $scope.baseurl = 'http://api.gotimenote.com/'
+    $scope.baseurl = 'https://api.gotimenote.com/'
 $scope.EventsForWeek = []
     function getEventsforTwoMonths(user_id, max_date, min_date) {
       // console.log('user_id, max_date, min_date')

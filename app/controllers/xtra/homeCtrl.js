@@ -121,7 +121,7 @@
       // $state.go('calendar', { user_id: user_id });
     }
 
-    $scope.baseurl = 'http://api.gotimenote.com/'
+    $scope.baseurl = 'https://api.gotimenote.com/'
 
     $scope.getEvents = function(data) {
       console.log("Get Events Running")

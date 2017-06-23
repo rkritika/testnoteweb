@@ -54,7 +54,7 @@
       $scope.user= {}
       // console.log($stateParams)
       // console.log('myCtrl')
-      $scope.baseUrl = 'http://api.gotimenote.com/'
+      $scope.baseUrl = 'https://api.gotimenote.com/'
     AppManager.getUserProfile($scope.id)
       .then(function(result) {
         $scope.user = {

@@ -53,7 +53,7 @@
     getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
       // 
 
-    $scope.baseurl = 'http://api.gotimenote.com/'
+    $scope.baseurl = 'https://api.gotimenote.com/'
     var dateEvents = []
 
     $scope.imgheart = '../../assets/images/ic_heart.png'

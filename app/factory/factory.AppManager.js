@@ -92,7 +92,7 @@
         payload.append('data', '{ "offset" : "' + offset + '" , "latitude" : "' + lat + '" , "longitude" : "' + long + '"}');
 
         $http({
-            url: 'http://api.gotimenote.com/user/get_nearby_chatbot/',
+            url: 'https://api.gotimenote.com/user/get_nearby_chatbot/',
             method: 'POST',
             data: payload,
             headers: { 'Content-Type': undefined },
@@ -119,7 +119,7 @@
         payload.append('data', '{ "user_id" : "' + user_id + '"}');
 
         $http({
-            url: 'http://api.gotimenote.com/user/get_user_website',
+            url: 'https://api.gotimenote.com/user/get_user_website',
             method: 'POST',
             data: payload,
             headers: { 'Content-Type': undefined },

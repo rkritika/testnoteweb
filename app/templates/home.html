@@ -85,7 +85,7 @@
                             <!-- <slick class="slider" lazy-load="ondemand" settings="slickConfig2" ng-if="slickConfig1Loaded" init-onload="true" next-arrow=".right" prev-arrow=".left" ng-cloak> -->
                             <div class="col-md-4" ng-repeat="i in posts.data track by $index">
                               <div class="item" ng-click="goToUser(i.user_id, i.time)">
-                                <img class="cro-image" ng-src="{{ i.link }}" onerror="this.src='http://placehold.it/350x150'" height="200px" width="318px" alt="" ng-click="goToUser(i.user_id, i.time)">
+                                <img class="cro-image" ng-src="{{ i.link }}" onerror="this.src='https://placehold.it/350x150'" height="200px" width="318px" alt="" ng-click="goToUser(i.user_id, i.time)">
                                 <img class="img-responsive user-img img-circle" ng-src="{{ baseurl+i.avatar }}" height="50px" width="50px" alt="">
                                 <div class="data">
                                   <h4 class="h4-cls">{{ i.fullname }} </h4>

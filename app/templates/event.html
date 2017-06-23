@@ -41,7 +41,7 @@
         <div class="col-md-offset-1 col-md-3 ">
           <a class="btn btn-default save-btn " ng-click="showAdvanced(data)" style="background-color: #2b904f; color: white; margin-right: 20px; ">Save</a>
           <!-- <a class="btn btn-default save-btn " ng-click="share(data) " style="background-color: #3b5998; color:#fff "><md-icon md-font-icon="android " aria-label="android "></md-icon> Share</a> -->          
-          <a href="#" class="btn btn-default save-btn" style="background-color: #3b5998; color:#fff" socialshare socialshare-provider="facebook" socialshare-url="{{url}}"> Share </a>
+          <a href="#" class="btn btn-default save-btn" style="background-color: #3b5998; color:#fff" socialshare socialshare-provider="facebook" socialshare-url="{{url}}"> Share</a>
        </div>       
       </div>
       <div class="row ">
@@ -68,6 +68,19 @@
           </div>
       </md-dialog>
     </script>
+    <script type="text/ng-template " id="loginerror.html ">
+      <md-dialog>
+          <!-- <h4 class="modal-title " ng-if="myCalFlag ">You need to login to view the calendar</h4> -->
+          <div layout="column " layout-align="center center " style="padding: 2rem 7rem ">
+            <div layout-gt-sm="row " class="inputdemoErrorsAdvanced " style="padding-bottom: 1.3rem ">
+              <h3>Login Error: Please login before saving the event</h3>
+            </div>
+            <!-- <md-button md-no-ink=" " class="md-primary " ng-click="save(data) ">Save</md-button>             -->
+            <md-button md-no-ink=" " class="md-primary " ng-click="cancel() ">Okay</md-button>
+          </div>
+      </md-dialog>
+    </script>
+
     <!-- /col-9 -->
   
 <!-- /main -->
