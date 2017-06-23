@@ -9,7 +9,10 @@ var app = express();
 var server = require('http').createServer(app);
 
 app.set('port', process.env.PORT || 4000);
+
 app.use(express.static(path.join(__dirname, '')));
+
+app.use(require('prerender-node'));
 
 server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));

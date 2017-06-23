@@ -4,6 +4,7 @@
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
 
       // $urlRouterProvider.otherwise('/');
+      $locationProvider.hashPrefix('!');
 
       $stateProvider
         .state('home', {
@@ -98,6 +99,10 @@
 
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
+      // $locationProvider.html5Mode({
+      //   enabled: true,
+      //   requireBase: false
+      // })
     }])
     .run(['$rootScope', '$state','ngMeta', function($rootScope, $state, ngMeta) {
       ngMeta.init();
