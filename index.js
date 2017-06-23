@@ -12,14 +12,9 @@ app.set('port', process.env.PORT || 4000);
 
 app.use(require('prerender-node'));
 
-app.use(require('prerender-node').set('prerenderToken', 'Y9LEIzcfgF1RdnpglMLf'));
-
-app.use(require('prerender-node').set('afterRender', function(err, req, prerender_res) {
-    // do whatever you need to do 
-    console.log("Page successfully rendered")
-}))
-
 app.use(express.static(path.join(__dirname, '')));
+
+// app.use(require('prerender-node').set('prerenderToken', 'Y9LEIzcfgF1RdnpglMLf'));
 
 server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
