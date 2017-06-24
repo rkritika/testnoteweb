@@ -46,6 +46,7 @@
                 });
             }else{
                 $mdDialog.show({
+                    controller: SaveController,                    
                     templateUrl: 'loginerror.html',
                     parent: angular.element(document.body),
                     targetEvent: ev,

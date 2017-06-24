@@ -6,15 +6,17 @@
       var _address = {
         "lat":"",
         "lng":"",
-        "offset":""
+        "offset":"",
+        "address":""
       };
       return {
-        setEvents: function(event, lat, lng, offset) {
+        setEvents: function(event, lat, lng, offset, address) {
           _event = event || _event;       
           $localStorage.event = _event;                    
           _address.lat = lat || lat;
           _address.lng = lng || lng;
           _address.offset = offset || offset;
+          _address.address = address || address
           console.log(_address)
           $localStorage.address = _address
         },

@@ -1,6 +1,6 @@
 (function() {
   var app = angular.module('myApp')
-  app.controller('monthCtrl', function($scope, $state, $location, $anchorScroll, $document, AppManager, _, $timeout, $filter,$window, $http, $q, $rootScope, MaterialCalendarData, $stateParams) {
+  app.controller('monthCtrl', function($scope, $state, $location, $anchorScroll, $document, AppManager, _, $timeout, $filter, $window, $http, $q, $rootScope, MaterialCalendarData, $stateParams) {
     console.log($stateParams)
     console.log($scope)
     console.log($rootScope)
@@ -60,7 +60,7 @@
     $scope.newMinDate = Date.parse($rootScope.data.minDate) / 1000
     $scope.newMaxDate = Date.parse($rootScope.data.maxDate) / 1000
     abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
-
+    console.log("selectedDate "+ $scope.selectedDate)    
     function getEvents(events) {
       var dateEvents = []
       var id = events.length;
@@ -84,7 +84,9 @@
       // $rootScope.data.selectedDate = date
       console.log($rootScope.data.selectedDate)
     };
+
     $scope.tooltips = true; 
+
     $rootScope.$watchCollection('data', function(newVal, oldVal) {
       var minDate = $scope.minDate = Date.parse(oldVal.minDate) / 1000
       var newMinDate = $scope.newMinDate = Date.parse(newVal.minDate) / 1000
@@ -110,6 +112,7 @@
         abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
       }
     })
+    
     $scope.$watch(function() {
       // $scope.currentMonth = "2"
       console.log("watch is running")
@@ -257,6 +260,5 @@
     //   console.log("NEXT MONTH")
     //   $scope.msg = "You clicked (next) month " + data.month + ", " + data.year;
     // };
-
   });
 })()

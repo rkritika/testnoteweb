@@ -13,6 +13,8 @@
       $scope.lat = $stateParams.lat
       $scope.lng = $stateParams.long
       $scope.address = $stateParams.address
+      // console.log($scope.address)
+
       findEvents($scope.lat, $scope.lng, 0)
     }
     $scope.posts = {
@@ -28,7 +30,13 @@
         $scope.lat = address.lat;
         $scope.lng = address.lng;
         $scope.offset = address.offset;
-        $scope.data = $scope.posts.data
+        $scope.address = address.address;
+        $scope.data = $scope.posts.data;
+        // AppManager.getEventAddress($scope.lat, $scope.lng)
+        // .then(function(result){
+        //   console.log(result[0].formatted_address)
+        //   $scope.address = result[0].formatted_address
+        // })
       }
     }
     // $scope.isEventStored = eventHandler.getEvents()
@@ -37,7 +45,7 @@
     // }
     $scope.$on('gmPlacesAutocomplete::placeChanged', function() {
       var location = $scope.autocomplete.getPlace().geometry.location;
-
+      // console.log
       $scope.address = $scope.autocomplete.getPlace().formatted_address
       $scope.lat = location.lat();
       $scope.lng = location.lng();
@@ -147,7 +155,7 @@
         $scope.posts.data.push($scope.data[i])
       }
       console.log($scope.posts.data)
-      eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset)
+      eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset, $scope.address)
       // $scope.updateEvents()
     }
 
@@ -186,7 +194,7 @@
             $scope.noDataResult = true;
           }
           $scope.posts.data = $scope.data
-          eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset)          
+          eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset, $scope.address)          
         })
         // $scope.slickConfig1Loaded = false;
         // var count = $scope.data.length

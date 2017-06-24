@@ -1,6 +1,6 @@
 (function() { 
   var app = angular.module('myApp')
-  app.controller('myCtrl', function($scope, $location, auth, $anchorScroll, $rootScope, $document, $window, AppManager, $http, $state, $stateParams) {
+  app.controller('myCtrl', function($scope, $mdDialog, md5, $location, auth, $anchorScroll, $rootScope, $document, $window, AppManager, $http, $state, $stateParams) {
     var token = auth.getToken()
     if(token != undefined)
     {
@@ -29,6 +29,68 @@
       }
     }
 
+    $scope.showAdvanced = function(ev) {
+      $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'dialog1.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function(answer) {
+          $window.location.reload()
+          $scope.status = 'You said the information was \n"' + answer;
+          console.log($scope.status)
+        }, function() {
+          $scope.status = 'You cancelled the dialog.';
+          // console.log($scope.status)
+          console.log($scope.status)
+
+        });
+    };
+    function DialogController($scope, $mdDialog, auth) {
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+      console.log(auth.isLoggedIn())
+
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+
+      $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+
+      $scope.login = function(user, password) {
+        var pass = md5.createHash(password)
+        AppManager.login(user, pass)
+          .then(function(result) {
+            console.log(result)
+            console.log("userName "+user)
+            var result = result
+            if (result.success === "true") {
+              var access_token = result.data.access_token
+              var user_id = result.data.user_id
+              var token = {
+                access_token: access_token,
+                user_id: user_id,
+                username: user
+              }
+              return auth.setToken(token)
+            } else {
+              console.log('Invalid username/password')
+            }
+            // return result
+          })
+          .then(function(result) {
+            $scope.answer(JSON.stringify(result))
+          })
+      }
+
+
+    }
     function onPositionUpdate(position) {
       var lat = position.coords.latitude;
       var lng = position.coords.longitude;

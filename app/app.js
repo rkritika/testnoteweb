@@ -79,15 +79,14 @@
               templateUrl: '../../../app/templates/event.html'
             }
           },
-          controller: 'eventCtrl',
-          data: {
-              meta: {
-                'title': 'Event',
-                'description': 'Visit timenote.com'
-              }
-            }
+          controller: 'eventCtrl'          
         })
-
+          // data: {
+          //     meta: {
+          //       'title': 'Event',
+          //       'description': 'Visit timenote.com'
+          //     }
+          //   }
       // $locationProvider.html5Mode({
       //   enabled: false,
       //   requireBase: false
