@@ -27,17 +27,18 @@
                     result.list_images[0].link = "https://api.gotimenote.com/" + ev[0] + '_large.jpg'
                     // var temp =  + result.avatar
                     // result.avatar = temp
+                    $scope.url = $location.absUrl();
                     $scope.data = result
                     console.log($scope.data)
+                    $scope.quote = "Website Link: "+ $scope.url + "   |   Event Name: " + $scope.data.name + "   |   Event Description: " + $scope.data.description
                 })
         console.log($scope.data)
 
         // $scope.data = $stateParams.event
         // $scope.url = $stateParams.url
-        $scope.url = $location.absUrl();
+        
         // $scope.url = "http://localhost:3000/?_escaped_fragment_=/calendar/21993/1498543200/event"
         // console.log($location.path())
-        console.log($scope.url)        
         // $scope.url = "http://testnotewb.herokuapp.com/#/calendar/21993/1498543200"
         // $scope.url = "https:///#/calendar/19633/1497909600"
         // $scope.data.link = $scope.data.link.replace('_medium.', '_large.')

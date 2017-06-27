@@ -28,7 +28,7 @@
         <!-- class="btn btn-default save-btn " background-color: #2b904f; -->
         <div class="col-md-1 social ">
           <div class="com-hea ">
-            <a ng-click="showAdvanced(data)" style=" color: #aaa;"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i></a>   
+            <a ng-click="showAdvanced(data)" style=" color: #aaa; cursor: pointer;"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i></a>   
           </div>
         </div>     
       </div>
@@ -80,11 +80,11 @@
                 socialshare-provider="facebook"
                 socialshare-type="feed"
                 socialshare-via="1953311694902380"
-                socialshare-source="http://720kb.net/assets/img/720kb-fb.png"
+                socialshare-source={{data.list_images[0].link}}
                 socialshare-url={{url}}
                 socialshare-redirect-uri={{url}}
-                socialshare-quote={{data.name}}{{data.description}}
-                socialshare-hashtags="#Timenote #events"
+                socialshare-quote={{quote}}
+                socialshare-hashtags="#Timenote"
                 socialshare-popup-height="300"
                 socialshare-popup-width="400"
                 socialshare-trigger="click">
