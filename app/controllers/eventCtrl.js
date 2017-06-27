@@ -21,7 +21,7 @@
         ngMeta.setTitle($scope.data.name)
         ngMeta.setTag('image', $scope.data.link)
         ngMeta.setTag('description', $scope.data.description)
-        // ngMeta.setTag('url', $scope.url);
+        ngMeta.setTag('url', $scope.url);
 
         if($scope.data == null){
             AppManager.getEventsByEventId(event_id)
