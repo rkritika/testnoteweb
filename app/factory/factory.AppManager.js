@@ -148,7 +148,7 @@
         payload.append('data', '{ "timer_id" : "' + event_id + '"}');
         
         $http({
-            url: 'http://api.gotimenote.com/user/get_timer_website',
+            url: 'https://api.gotimenote.com/user/get_timer_website',
             method: 'POST',
             data: payload,
             headers: { 'Content-Type': undefined },
