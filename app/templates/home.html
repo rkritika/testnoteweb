@@ -18,9 +18,9 @@
                     </li>
                     <!-- <li>
                         <a class="page-scroll" href="/#/about">Explore</a>
-                    </li> -->
+                    </li> --> <!-- href="/#/calendar/{{user_id}}" -->
                     <li ng-if="isLoggedIn">
-                        <a class="page-scroll" href="/#/calendar/{{user_id}}">My Calendar</a>
+                        <a class="page-scroll" ui-sref="calendar({id: user_id})">My Calendar</a>
                     </li>
                     <li ng-if="!isLoggedIn">
                         <a class="page-scroll" href="" ng-click="showAdvanced($event)">My Calendar</a>

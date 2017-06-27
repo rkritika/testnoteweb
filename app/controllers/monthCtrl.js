@@ -27,6 +27,7 @@
           $scope.dd = temp
           $scope.size  = _.keys($scope.dd).length
           console.log(_.keys($scope.dd).length)
+          console.log("$scope.size "+ $scope.size)
           if($scope.size == 0){
             return {};
           }
@@ -112,7 +113,7 @@
         abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
       }
     })
-    
+
     $scope.$watch(function() {
       // $scope.currentMonth = "2"
       console.log("watch is running")

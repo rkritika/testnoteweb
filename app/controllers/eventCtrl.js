@@ -19,9 +19,15 @@
         $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
         // $scope.posts = [{id:1,title:"title1",content:"content1",caption:"caption1"},{id:2,title:"title2",content:"content2",caption:"caption2"}];
         ngMeta.setTitle($scope.data.name)
-        ngMeta.setTag('image', $scope.data.link);
-        ngMeta.setTag('description', $scope.data.description);
+        ngMeta.setTag('image', $scope.data.link)
+        ngMeta.setTag('description', $scope.data.description)
         // ngMeta.setTag('url', $scope.url);
+
+        if($scope.data == null){
+            AppManager.getEventsByEventId(event_id)
+              .then(function(result) {
+              })
+        }
 
         $scope.showAdvanced = function(ev) {
 

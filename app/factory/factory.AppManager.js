@@ -139,6 +139,34 @@
           }
 
           return deferred.promise;
+        },
+        getEventsByEventId: function(event_id, user_id, access_token) {
+          console.log(lat, long, offset)
+          var deferred = $q.defer();
+          var payload = new FormData();
+
+          payload.append('data', '{ "timer_id" : "' + offset + '" , "current_user_id" : "' + lat + '" , "access_token " : "' + long + '"}');
+
+          $http({
+              url: 'http://api.gotimenote.com/user/get_timer_website',
+              method: 'POST',
+              data: payload,
+              headers: { 'Content-Type': undefined },
+              transformRequest: angular.identity
+            })
+            .then(_success, _error)
+
+          function _success(data) {
+            console.log(data.data)
+              // var access_token = data.data.data.access_token
+            deferred.resolve(data.data);
+          }
+
+          function _error(err) {
+            deferred.reject(err);
+          }
+
+          return deferred.promise;
         }
 
         // getEventAddress: function(lat, lng) {
