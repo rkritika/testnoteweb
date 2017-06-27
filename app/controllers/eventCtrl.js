@@ -124,7 +124,7 @@
                 console.log(access_token)
                 var auth1 = auth.getToken()
                 console.log(auth1)
-                var event_id = $stateParams.event.id;
+                var event_id = $stateParams.event_id;
                 console.log(event_id)
                 AppManager.saveEvent(username, user_id, event_id, access_token)
                     .then(function(result) {
