@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5', '720kb.socialshare', 'ngMeta'])
+  var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5', '720kb.socialshare', 'ngMeta', 'djds4rce.angular-socialshare'])
     .value('duScrollDuration', 4000)
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
 
@@ -73,7 +73,7 @@
             event: null,
             url: null
           },
-          url: '/event',
+          url: '/event/:event_id',
           views: {
             '': {
               templateUrl: '../../../app/templates/event.html'
@@ -101,8 +101,9 @@
       //   requireBase: false
       // })
     }])
-    .run(['$rootScope', '$state','ngMeta', function($rootScope, $state, ngMeta) {
+    .run(['$rootScope', '$state','ngMeta','$FB', function($rootScope, $state, ngMeta, $FB) {
       ngMeta.init();
+      $FB.init('1953311694902380');
       $rootScope.$on('$stateChangeSuccess', function(evt, to, params) {
         if (to.redirectTo) {
           evt.preventDefault();

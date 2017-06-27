@@ -12,6 +12,7 @@
     "angular-md": "^1.0.0",
     "angular-md5": "^0.1.10",
     "angular-socialshare": "^2.3.8",
+    "angulike": "^1.1.2",
     "express": "^4.14.0",
     "prerender-node": "^2.7.1",
     "underscore": "^1.8.3"

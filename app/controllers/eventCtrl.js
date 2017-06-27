@@ -1,14 +1,38 @@
 (function() {
     var app = angular.module('myApp')
-    app.controller('eventCtrl', function($scope, ngMeta, $location, AppManager, $http, $state, auth, $window, $filter, _, $rootScope, $stateParams, $mdDialog) {
-
+    app.controller('eventCtrl', function($timeout, $scope, ngMeta, $location, AppManager, $http, $state, auth, $window, $filter, _, $rootScope, $stateParams, $mdDialog) {
+      //   $scope.myModel = {
+      //     Url: 'http://jasonwatmore.com/post/2014/08/01/AngularJS-directives-for-social-sharing-buttons-Facebook-Like-GooglePlus-Twitter-and-Pinterest.aspx',
+      //     Name: "AngularJS directives for social sharing buttons - Facebook, Google+, Twitter and Pinterest | Jason Watmore's Blog", 
+      //     ImageUrl: 'http://www.jasonwatmore.com/pics/jason.jpg'
+      // };
         // console.log($stateParams.eventId)
         // console.log($stateParams.id)
+        // AppManager
+        // .getEventsByEventId($stateParams.event_id)
+        // .then(function(result) {
+        //     console.log(result)
+        // })
+        $scope.data = {}
         $scope.imgheart = '../../assets/images/ic_heart.png'
         $scope.imgcomment = '../../assets/images/ic_comments.png'
         console.log($stateParams)
+        console.log($stateParams.event)
         console.log(auth)
-        $scope.data = $stateParams.event
+        AppManager
+            .getEventsByEventId($stateParams.event_id)
+                .then(function(result) {
+                    console.log(result)
+                    var ev = result.list_images[0].link.split('.')
+                    result.list_images[0].link = "https://api.gotimenote.com/" + ev[0] + '_large.jpg'
+                    // var temp =  + result.avatar
+                    // result.avatar = temp
+                    $scope.data = result
+                    console.log($scope.data)
+                })
+        console.log($scope.data)
+
+        // $scope.data = $stateParams.event
         // $scope.url = $stateParams.url
         $scope.url = $location.absUrl();
         // $scope.url = "http://localhost:3000/?_escaped_fragment_=/calendar/21993/1498543200/event"
@@ -16,7 +40,7 @@
         console.log($scope.url)        
         // $scope.url = "http://testnotewb.herokuapp.com/#/calendar/21993/1498543200"
         // $scope.url = "https:///#/calendar/19633/1497909600"
-        $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
+        // $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
         // $scope.posts = [{id:1,title:"title1",content:"content1",caption:"caption1"},{id:2,title:"title2",content:"content2",caption:"caption2"}];
         ngMeta.setTitle($scope.data.name)
         ngMeta.setTag('image', $scope.data.link)
@@ -24,9 +48,7 @@
         ngMeta.setTag('url', $scope.url);
 
         if($scope.data == null){
-            AppManager.getEventsByEventId(event_id)
-              .then(function(result) {
-              })
+            
         }
 
         $scope.showAdvanced = function(ev) {
@@ -142,7 +164,6 @@
         //     var time = $filter("date")(date, "shortTime")
         // var res = str.replace("Microsoft", "W3Schools");
         // console.log(JSON.stringify($stateParams.event) )
-
 
     });
 

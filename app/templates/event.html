@@ -1,15 +1,15 @@
 <div class="padding" ng-controller="eventCtrl">
-    <div class="full col-sm-9">
-        <!-- content -->
-        <!--/top story-->
-        <div class="row">
-            <div class="text-center day-hr">
-                <h5>DAY</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 cook-img">
-                <img class="img-responsive" ng-src="{{data.link}}" style="height:auto; alt=" ">
+  <div class="full col-sm-9">
+    <!-- content -->
+    <!--/top story-->
+    <div class="row">
+      <div class="text-center day-hr">
+        <h5>DAY</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 cook-img">
+        <img class="img-responsive" ng-src="{{data.list_images[0].link}}" style="height:auto; alt=" ">
         </div>
       </div>
       <div class="row ">
@@ -17,14 +17,20 @@
           <div class="com-hea ">
             <img class="img-responsive icoo " ng-src="{{imgheart}} " alt=" ">
              {{data.likes}}
-             </div> 
-             </div>
-             <div class="col-md-2 social ">
-             <div class="com-hea ">
+          </div> 
+        </div>
+        <div class="col-md-1 social ">
+          <div class="com-hea ">
             <img class="img-responsive icoo " ng-src="{{imgcomment}} " alt=" ">
            {{data.comments.count}}                    
-            </div>
+          </div>
         </div>
+        <!-- class="btn btn-default save-btn " background-color: #2b904f; -->
+        <div class="col-md-1 social ">
+          <div class="com-hea ">
+            <a ng-click="showAdvanced(data)" style=" color: #aaa;"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i></a>   
+          </div>
+        </div>     
       </div>
       <div class="row ">
         <div class="col-md-6 ">
@@ -32,17 +38,17 @@
         </div>
       </div>
       <div class="row ">
-        <div class="col-md-3 ">
-          <h3 class="oct ">{{data.date}}</h3>
-        </div>
         <div class="col-md-2 ">
-          <h3 class="oct ">{{data.time}}</h3>
-        </div>          
+          <h3 class="oct ">{{data.created_time | date:'shortTime'}}</h3>
+        </div>  
+        <div class="col-md-3 ">
+          <h3 class="oct ">{{data.time*1000 | date:'yyyy-MM-dd'}}</h3>
+        </div>              
       </div>
       <div class="row ">
         <div class="col-md-6 ">
-          <img class="img-responsive loca " src="../assets/images/ic_loc.png " alt=" ">
-          <p class="party ">{{data.location}}</p>
+          <img class="img-responsive loca " src="../assets/images/ic_loc.png " alt="">
+          <p class="party ">{{data.location_infos_uni}}</p>
         </div>
       </div>
       <div class="row ">
@@ -50,20 +56,60 @@
           <p class=" ">{{data.description}}</p>
         </div>
       </div>
-      <div class="row" style="margin-bottom: 5rem">
+      <div class="row " style="margin-bottom: 5rem">
         <div class="col-md-5 ">
-          <a class="btn btn-default save-btn " ng-click="showAdvanced(data)" style="background-color: #2b904f; color: white;"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i></a>
-          <!-- <a class="btn btn-default save-btn " ng-click="share(data) " style="background-color: #3b5998; color:#fff "><md-icon md-font-icon="android " aria-label="android "></md-icon> Share</a> -->          
-          <a href="#" class="btn btn-default save-btn" style="background-color: #3b5998; color:#fff" socialshare socialshare-provider="facebook" socialshare-url="{{url}}"> <i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a>
-          <a href="#" class="btn btn-default save-btn" style="background-color: #007bb6; color:#fff" socialshare socialshare-provider="linkedin" socialshare-url="{{url}}" socialshare-text="{{data.name}}" socialshare-description="{{data.description}}" socialshare-source="{{url}}"> <i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a>
-          <a href="#" class="btn btn-default save-btn" style="background-color: #00aced; color:#fff" socialshare socialshare-provider="twitter" socialshare-url="{{url}}" socialshare-text="{{data.name}}" socialshare-hashtags="#Timenote #Events" socialshare-via="Timenote"> <i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
+          
+          <!-- <div fb-like="myModel.Url "></div> -->
+          <!-- <a facebook-feed-share class="facebookShare " data-url='{{url}}' data-shares='0', data-caption='{{data.name}}' data-picture='{{data.link}}' data-description="{{data.description}} " data-callback='callback'></a> -->
+          <!-- <a facebook-feed-share class="facebookShare " data-url='http://google.com' data-shares='0', data-caption='Events' data-picture='http://plnkr.co/img/plunker.png' data-description="Example Description " data-callback='callback'></a> -->
+          <!-- <a class="btn btn-default save-btn " ng-click="share(data) " style="background-color: #3b5998; color:#fff "><md-icon md-font-icon="android " aria-label="android "></md-icon> Share</a> -->
+
+         <!--  <div facebook class="facebookShare" data-title='{{data.name}}' data-picture-url='http://i.imgur.com/WACv9Cl.jpg' data-url='{{url}}' data-shares='shares' data-callback='callback'></div> -->
+          
+          <!-- <button class="btn btn-medium font-bold" socialshare socialshare-provider="facebook" socialshare-type="sharer"
+                socialshare-text="720k"
+                socialshare-url="http://720kb.net"
+                socialshare-popup-height="300"
+                socialshare-popup-width="400"
+                socialshare-trigger="click">
+            <i class="fa fa-facebook"></i>
+        </button> -->
+        <!-- <p>{{url}}</p> -->
+        <button class="btn btn-default save-btn " style="background-color: #3b5998; color:#fff "
+                socialshare
+                socialshare-provider="facebook"
+                socialshare-type="feed"
+                socialshare-via="1953311694902380"
+                socialshare-source="http://720kb.net/assets/img/720kb-fb.png"
+                socialshare-url={{url}}
+                socialshare-redirect-uri={{url}}
+                socialshare-quote={{data.name}}{{data.description}}
+                socialshare-hashtags="#Timenote #events"
+                socialshare-popup-height="300"
+                socialshare-popup-width="400"
+                socialshare-trigger="click">
+            <i class="fa fa-facebook"></i>
+        </button>
+                <!-- socialshare-text="720k" -->
+
+                <!-- socialshare-media="http://720kb.net/assets/img/720kb-fb.png" -->
+                <!-- socialshare-caption="Timenote" -->
+
+          <!-- <a facebook-feed-share class="facebookShare" data-url='{{url}}' data-shares='shares', data-caption='example caption' data-picture='https://api.gotimenote.com/images/trust/2017/Jan/Sat/5befce8ccc7ff591afb079005e8cd202_large.jpg' data-description="Example text" data-callback='callback'></a> -->
+
+          <!-- <a facebook-dialog-feed class="btn btn-default save-btn " style="background-color: #3b5998; color:#fff " socialshare socialshare-provider="facebook"  socialshare-url="http://google.com"> <i class="fa fa-facebook fa-lg " aria-hidden="true "></i></a> -->
+          
+          <a href="# " class="btn btn-default save-btn " style="background-color: #007bb6; color:#fff " socialshare socialshare-provider="linkedin " socialshare-url="{{url}} " socialshare-text="{{data.name}} " socialshare-description="{{data.description}} " socialshare-source="{{url}} "> <i class="fa fa-linkedin fa-lg " aria-hidden="true "></i></a>
+          
+          <a href="# " class="btn btn-default save-btn " style="background-color: #00aced; color:#fff " socialshare socialshare-provider="twitter " socialshare-url="{{url}} " socialshare-text="{{data.name}} " socialshare-hashtags="#Timenote #Events " socialshare-via="Timenote "> <i class="fa fa-twitter fa-lg " aria-hidden="true "></i></a>
+
        </div>   
       </div>
     </div>
     <script type="text/ng-template " id="savedialog.html ">
       <md-dialog>
           <!-- <h4 class="modal-title " ng-if="myCalFlag ">You need to login to view the calendar</h4> -->
-          <div layout="column" layout-align="center center " style="padding: 2rem 7rem ">
+          <div layout="column " layout-align="center center " style="padding: 2rem 7rem ">
             <div layout-gt-sm="row " class="inputdemoErrorsAdvanced " style="padding-bottom: 1.3rem ">
               <h3>Are you sure you want to save this event?</h3>
             </div>
@@ -80,7 +126,7 @@
               <h3>Please login before saving the event</h3>
             </div>
             <!-- <md-button md-no-ink=" " class="md-primary " ng-click="save(data) ">Save</md-button>             -->
-            <md-button md-no-ink=" " class="md-primary " ng-click="cancel()">Okay</md-button>
+            <md-button md-no-ink=" " class="md-primary " ng-click="cancel() ">Okay</md-button>
           </div>
       </md-dialog>
     </script>
