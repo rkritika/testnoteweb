@@ -19,7 +19,7 @@
       console.log('user_id, max_date, min_date')
       var temp = {}
       console.log(user_id, max_date, min_date)
-      return AppManager.getEventsforTwoMonths(user_id, max_date, min_date)
+      return AppManager.getEventsforTwoMonths("",user_id, max_date, min_date)
         .then(function(result) {
           var events = result.timers
           temp = getEvents(events)

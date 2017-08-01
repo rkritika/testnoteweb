@@ -9,7 +9,7 @@ $scope.EventsForWeek = []
       $scope.EventsForWeek = []
 
       console.log(user_id, max_date, min_date)
-      AppManager.getEventsforTwoMonths(user_id, max_date, min_date)
+      AppManager.getEventsforTwoMonths("",user_id, max_date, min_date)
         .then(function(result) {
           $("#BodyField").fadeOut();
           var events = result.timers
@@ -89,13 +89,16 @@ $scope.EventsForWeek = []
     })
 
     function getEvents(events, week) {
+      console.log("getEvents")
+      console.log(events)
+      console.log(week)
       $scope.EventsForWeek = []
       angular.forEach(events, function(value, key) {
-        // console.log(key)
+        console.log(key)
         var weekday = {};
         if (key == week) {
-          // console.log(key)
-          // console.log(weekday)
+          console.log(key)
+          console.log(weekday)
           weekday = _.groupBy(events[key], 'day')
             // console.log(weekday)
           $scope.EventsForWeek = weekday
