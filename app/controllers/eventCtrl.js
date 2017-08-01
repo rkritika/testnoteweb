@@ -50,8 +50,9 @@
             .getEventsByEventId($scope.user_id, $stateParams.event_id)
                 .then(function(result) {
                     console.log(result)
+                    console.log(result.list_images[0].link)
                     var ev = result.list_images[0].link.split('.')
-                    result.list_images[0].link = "https://api.gotimenote.com/" + ev[0] + '_large.jpg'
+                    result.list_images[0].link ="https://api.gotimenote.com/" + ev[0] + '_medium.jpg'
                     // var temp =  + result.avatar
                     // result.avatar = temp
                     $scope.url = $location.absUrl();

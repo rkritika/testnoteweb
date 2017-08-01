@@ -151,7 +151,7 @@
         // console.log(data[i])
         var temp = $scope.data[i].link
         temp = temp.split('.')
-        $scope.data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
+        $scope.data[i].link = $scope.baseurl + temp[0] + '_large.jpg'
         $scope.posts.data.push($scope.data[i])
       }
       console.log($scope.posts.data)
@@ -180,7 +180,7 @@
             for (var i = old_length; i < new_length; i++) {
               var temp = $scope.data[i].link            
               temp = temp.split('.')
-              $scope.data[i].link = $scope.baseurl + temp[0] + '_medium.jpg'
+              $scope.data[i].link = $scope.baseurl + temp[0] + '_large.jpg'
               console.log($)
                 // $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>'+ data[i].user_id +'</div>')
                 // ng-click="goToUser('+data[i].user_id+')"

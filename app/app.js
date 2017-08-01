@@ -1,11 +1,11 @@
 (function() {
   var app = angular.module('myApp', ['ngRoute', 'ngMaterial', 'slickCarousel', 'ngStorage', 'ngAnimate', 'duScroll', 'ngResource', 'underscore', 'gm', 'ngSanitize', 'materialCalendar', 'ui.bootstrap', 'ui.router', 'angularModalService', 'angular-loading-bar', 'angular-md5', '720kb.socialshare', 'ngMeta', 'djds4rce.angular-socialshare'])
     .value('duScrollDuration', 4000)
-    .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
+    .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider, $window) {
 
-      // $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/');
       $locationProvider.hashPrefix('!');
-      
+      // $window.location.href="http://www.google.com";
       // $locationProvider.html5Mode({
       //   enabled: true,
       //   requireBase: false

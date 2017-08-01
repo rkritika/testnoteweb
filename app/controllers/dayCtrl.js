@@ -68,7 +68,7 @@
                       angular.forEach(events, function(value, key) {
                           if (events[key].link != null) {
                               var ev = events[key].link.split('.')
-                              events[key].link = $scope.baseurl + ev[0] + '_medium.jpg'
+                              events[key].link = $scope.baseurl + ev[0] + '_large.jpg'
                           }
                           //
                           else {

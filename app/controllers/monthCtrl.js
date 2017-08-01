@@ -58,8 +58,10 @@
     //   }
     // }
     $scope.selectedDate = $rootScope.data.selectedDate
+    console.log($rootScope.data.minDate, $rootScope.data.maxDate, $rootScope.data.selectedDate)    
     $scope.newMinDate = Date.parse($rootScope.data.minDate) / 1000
     $scope.newMaxDate = Date.parse($rootScope.data.maxDate) / 1000
+    console.log($scope.newMinDate, $scope.newMaxDate, $scope.selectedDate)
     abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
     console.log("selectedDate "+ $scope.selectedDate)    
     function getEvents(events) {
