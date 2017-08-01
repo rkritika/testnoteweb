@@ -3,15 +3,44 @@
   app.factory('AppManager', function($q, $http, auth) {
 
     return {
-      getEventsforTwoMonths: function(user_id, max_date, min_date) {
+      getEventsforTwoMonths: function(current_user_id, user_id, max_date, min_date) {
         var deferred = $q.defer();
         var payload = new FormData();
-        // console.log(user_id)
-        // console.log(max_date)
-        // console.log(min_date)
-        payload.append('data', '{"user_id":"' + user_id + '","max_date":"' + max_date + '","min_date":"' + min_date + '"}');
+        console.log(current_user_id)
+        if(current_user_id == "" || current_user_id == undefined || current_user_id == null){
+          console.log("!logged")          
+          payload.append('data', '{"user_id":"' + user_id + '","max_date":"' + max_date + '","min_date":"' + min_date + '"}');
+        }else{
+          console.log("logged")
+          payload.append('data', '{"current_user_id":"'+current_user_id+'","user_id":"' + user_id + '","max_date":"' + max_date + '","min_date":"' + min_date + '"}');          
+        }
         $http({
             url: 'https://api.gotimenote.com/user/get_profile_website',
+            method: 'POST',
+            data: payload,
+            headers: { 'Content-Type': undefined },
+            transformRequest: angular.identity
+          })
+          .then(_success, _error)
+
+        function _success(data) {
+          console.log(data.data)
+          deferred.resolve(data.data.data);
+        }
+
+        function _error(err) {
+          deferred.reject(err);
+        }
+
+        return deferred.promise;
+      },
+
+      likeEvent: function(user_id, access_token, timer_id) {
+        var deferred = $q.defer();
+        var payload = new FormData();
+        payload.append('data', '{"user_id":"' + user_id + '","access_token":"' + access_token + '","timer_id":"' + timer_id + '","type":"' + "1" + '"}');
+        $http({
+            url: 'https://api.gotimenote.com/user_push/vote',
             method: 'POST',
             data: payload,
             headers: { 'Content-Type': undefined },
@@ -48,7 +77,6 @@
 
         function _success(data) {
           console.log(data.data.data.access_token)
-            // var access_token = data.data.data.access_token
           deferred.resolve(data.data);
         }
 
@@ -75,7 +103,6 @@
 
         function _success(data) {
           console.log(data.data.data.access_token)
-            // var access_token = data.data.data.access_token
           deferred.resolve(data.data);
         }
 
@@ -103,7 +130,6 @@
 
         function _success(data) {
           console.log(data.data)
-            // var access_token = data.data.data.access_token
           deferred.resolve(data.data);
         }
 
@@ -116,9 +142,7 @@
       getUserProfile: function(user_id) {
         var deferred = $q.defer();
         var payload = new FormData();
-
         payload.append('data', '{ "user_id" : "' + user_id + '"}');
-
         $http({
             url: 'https://api.gotimenote.com/user/get_user_website',
             method: 'POST',
@@ -130,7 +154,6 @@
 
         function _success(data) {
           console.log(data.data)
-            // var access_token = data.data.data.access_token
           deferred.resolve(data.data.data);
         }
 
@@ -140,12 +163,15 @@
 
         return deferred.promise;
       },
-      getEventsByEventId: function(event_id) {
+      getEventsByEventId: function(current_user_id, event_id) {
         console.log(event_id)
         var deferred = $q.defer();
         var payload = new FormData();
-
-        payload.append('data', '{ "timer_id" : "' + event_id + '"}');
+        if(current_user_id == "" || current_user_id == undefined || current_user_id == null){
+          payload.append('data', '{ "timer_id" : "' + event_id + '"}');
+        }else{
+          payload.append('data', '{ "current_user_id":"'+ current_user_id + '","timer_id" : "' + event_id + '"}');       
+        }
         
         $http({
             url: 'https://api.gotimenote.com/user/get_timer_website',
@@ -158,7 +184,6 @@
 
         function _success(data) {
           console.log(data.data)
-            // var access_token = data.data.data.access_token
           deferred.resolve(data.data.data);
         }
 

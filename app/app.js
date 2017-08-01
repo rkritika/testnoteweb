@@ -5,6 +5,11 @@
 
       // $urlRouterProvider.otherwise('/');
       $locationProvider.hashPrefix('!');
+      
+      // $locationProvider.html5Mode({
+      //   enabled: true,
+      //   requireBase: false
+      // })
 
       $stateProvider
         .state('home', {

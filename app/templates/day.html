@@ -13,25 +13,38 @@
         <h5>DAY</h5>
       </div>
     </div>
-    <div class="row first-row" ng-repeat="i in events" ng-click="goToEvent(i)">
+    <div class="row first-row" ng-repeat="i in events">
       <div class="col-md-3 col-sm-5 col-xs-12">
-        <a><img ng-src="{{i.link}}" class="img-responsive first-image" style="height: 161px; width:221px;"></a>
+        <a ng-click="goToEvent(i)" style="cursor: pointer"><img ng-src="{{i.link}}" class="img-responsive first-image" style="height: 161px; width:221px;"></a>
       </div>
       <div class="col-md-6 col-sm-5 col-xs-12">
         <h3 class="event-time">{{i.time}}</h3>
-        <h4 class="event-name">{{i.name}}</h4>
+        <a ng-click="goToEvent(i)" style="cursor: pointer"><h4 class="event-name">{{i.name}}</h4></a>
       </div>
       <div class="row">
-        <div class="col-md-1 col-sm-2 col-xs-12 hc-icon hidden-xs">
+        <!-- <div class="col-md-1 col-sm-2 col-xs-12 hc-icon hidden-xs">
           <a class="icoo"><img ng-src="{{imgcomment}}" class="img-responsive "></a>
           {{i.comments.count}}
-        </div>
+        </div> -->
         <div class="col-md-1 col-sm-2 col-xs-12 hc-icon hidden-xs">
-          <a class="icoo"><img ng-src="{{imgheart}}" class="img-responsive "> </a>
+          <a class="icoo" ng-click="likeEvent(i)" style="cursor: pointer"><img ng-src="{{imgheart}}" class="img-responsive" ng-if="i.type == null"><img ng-src="{{imgheart_change}}" class="img-responsive " ng-if="i.type != null"> </a>
           {{i.likes}}
         </div>
       </div>
     </div>
+
   </div>
+  <script type="text/ng-template " id="loginerror.html ">
+      <md-dialog>
+          <!-- <h4 class="modal-title " ng-if="myCalFlag ">You need to login to view the calendar</h4> -->
+          <div layout="column " layout-align="center center " style="padding: 2rem 7rem ">
+            <div layout-gt-sm="row " class="inputdemoErrorsAdvanced " style="padding-bottom: 1.3rem ">
+              <h3>Please login before proceeding</h3>
+            </div>
+            <!-- <md-button md-no-ink=" " class="md-primary " ng-click="save(data) ">Save</md-button>             -->
+            <md-button md-no-ink=" " class="md-primary " ng-click="cancel() ">Okay</md-button>
+          </div>
+      </md-dialog>
+    </script>
   <!-- /col-9 -->
 </div>
