@@ -77,6 +77,7 @@
     }
 
     $scope.search = function(lat, long, offset) {
+      console.log('search')
       $scope.slickConfig1Loaded = false;
       $scope.noDataResult = false;
       // console.log($scope)
@@ -102,6 +103,7 @@
     }
 
     function findEvents() {
+      console.log('findEvents')
       $scope.noDataResult = false;
       AppManager.getEventsByLocation($scope.lat, $scope.lng, 1)
         .then(function(result) {
@@ -155,11 +157,14 @@
         $scope.posts.data.push($scope.data[i])
       }
       console.log($scope.posts.data)
+      console.log($scope.address, $scope.lat, $scope.lng)
+
       eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset, $scope.address)
       // $scope.updateEvents()
     }
 
     $scope.updateEvents = function() {
+      console.log('updateEvents')
       AppManager.getEventsByLocation($scope.lat, $scope.lng, $scope.offset)
         .then(function(result) {
           console.log(result)

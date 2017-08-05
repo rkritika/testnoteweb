@@ -7,12 +7,12 @@
         <h5>WEEK</h5>
       </div>
     </div>
-    <div class="loading" id="BodyField" ng-if="EventsForWeek.length==0">
+    <!-- <div class="loading" id="BodyField" ng-if="EventsForWeek.length==0">
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
-    </div>
+    </div> -->
     <div class="gridListdemoWeekUsage" ng-if="EventsForWeek.length!==0">
       <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="7" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
         <md-grid-tile class="sun" md-rowspan="0" md-colspan="0" md-colspan-sm="1" md-colspan-xs="1">
@@ -52,7 +52,7 @@
         </md-grid-tile>
       </md-grid-list>
     </div>
-    <div class="gridListdemoBasicUsage" layout="row">
+    <div class="gridListdemoBasicUsage" layout="row" ng-if="EventsForWeek.length!==0">
       <div class='md-padding' layout="column" layout-wrap >
         <md-card style="width: 95px;" ng-repeat="event in EventsForWeek.Sunday | orderBy : 'time'" ng-click="goToEvent(event)">
           <img src="{{event.link}}" class="md-card-image" alt="user avatar">
@@ -115,6 +115,11 @@
             <p class="week-dis"> {{event.name}}</p>
           </md-card-content>
         </md-card>
+      </div>
+    </div>
+    <div class="row" ng-if="EventsForWeek.length==0">
+      <div class="col-md-6 col-sm-5 col-xs-12">
+        <h3 class="event-time">OOPS!! There are no events.</h3>
       </div>
     </div>
   </div>

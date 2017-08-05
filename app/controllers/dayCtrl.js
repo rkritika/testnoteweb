@@ -6,7 +6,7 @@
         $scope.events = []
         // return false;
         $scope.userName = {}
-
+        console.log($scope.events)
         var token = auth.getToken()
         if (token != undefined) {
             $scope.current_user_id = token.user_id
@@ -48,6 +48,7 @@
             }
 
         }
+        console.log($rootScope.data.minDate, $scope.newminDate)
 
         function getEventsforTwoMonths(current_user_id, user_id, max_date, min_date) {
             console.log('current_user_id, user_id, max_date, min_date')
@@ -89,7 +90,7 @@
                     }
                 })
         }
-        // console.log($scope.minDate)
+        console.log($rootScope.data.minDate, $scope.newminDate)
         $scope.newMinDate = Date.parse($rootScope.data.minDate) / 1000
         $scope.newMaxDate = Date.parse($rootScope.data.maxDate) / 1000
         getEventsforTwoMonths($scope.current_user_id, $scope.user_id, $scope.newMaxDate, $scope.newMinDate)
@@ -137,16 +138,27 @@
         // });
 
         $rootScope.$watchCollection('data', function(newVal, oldVal) {
+            console.log('data watchCollection', newVal, oldVal)
+            console.log($scope.data.selectedDate)
+            $scope.events = []
             var minDate = $scope.minDate = Date.parse(oldVal.minDate) / 1000
             var newMinDate = $scope.newMinDate = Date.parse(newVal.minDate) / 1000
             var maxDate = $scope.maxDate = Date.parse(oldVal.maxDate) / 1000
             var newMaxDate = $scope.newMaxDate = Date.parse(newVal.maxDate) / 1000
             var selectedDate = Date.parse(newVal.selectedDate) / 1000
-            if (selectedDate >= minDate && selectedDate <= maxDate) {
+            console.log(selectedDate, minDate, maxDate)
+            if (selectedDate >= newMinDate && selectedDate <= newMaxDate) {
                 // console.log('assignDate')
                 // console.log(minDate, maxDate, selectedDate)
                 $scope.date = selectedDate;
-                $scope.assignDate()
+                // if($scope.EventsList.length == 0){
+                //     getEventsforTwoMonths($scope.current_user_id, $scope.user_id, $scope.newMaxDate, $scope.newMinDate)
+                //     .then(function(result){
+                //         $scope.assignDate()                        
+                //     })
+                // }else{
+                    $scope.assignDate()                    
+                // }
             } else {
                 $scope.events = []
                 // console.log('getEventsforTwoMonths')
@@ -163,6 +175,7 @@
         //   console.log($rootScope.days)
         // });
         $scope.assignDate = function() {
+            console.log('assignDate')
             var selectedDate = $rootScope.data.selectedDate
             var date = $filter("date")(selectedDate, "yyyy-MM-dd")
             var ddd = $filter("date")(selectedDate, "w")
@@ -170,8 +183,12 @@
         }
 
         function assignData(data, date) {
+            console.log('assignData', data, date)
+            // $scope.events = []
+            var eventFlag = false
             angular.forEach(data, function(value, key) {
                 if (key === date) {
+                    eventFlag = true
                     var ev = data[key]
                     console.log(ev)
                     console.log("------")
@@ -179,12 +196,18 @@
                     // console.log(data.month)
                     var a = parseInt(key.substring(5, 7)) - 1;
                     $rootScope.currentMonth = a;
-                    console.log("Current Month" + $rootScope.currentMonth)
+                    console.log("Current Month " + $rootScope.currentMonth)
 
                     if (ev.length != 0) {
                         $scope.events = ev
                         console.log($scope.events)
                     }
+                }
+
+                if(eventFlag == false){
+                    var a = parseInt(date.substring(5, 7)) - 1;
+                    $rootScope.currentMonth = a;
+                    // console.log(date.getMonth())
                 }
             })
             // console.log( $scope.events)

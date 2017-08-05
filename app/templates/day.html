@@ -1,10 +1,10 @@
 <div class="padding" ng-controller="dayCtrl">
-  <div class="loading" id="BodyField" ng-if="events.length==0">
+  <!-- <div class="loading" id="BodyField" ng-if="events.length==0">
     <div class="loading-bar"></div>
     <div class="loading-bar"></div> 
     <div class="loading-bar"></div>
     <div class="loading-bar"></div>
-  </div>
+  </div> -->
   <div class="full col-sm-9">
     <!-- content -->
     <!--/top story-->
@@ -13,7 +13,7 @@
         <h5>DAY</h5>
       </div>
     </div>
-    <div class="row first-row" ng-repeat="i in events">
+    <div class="row first-row" ng-repeat="i in events" ng-if="events.length != 0">
       <div class="col-md-3 col-sm-5 col-xs-12">
         <a ng-click="goToEvent(i)" style="cursor: pointer"><img ng-src="{{i.link}}" class="img-responsive first-image" style="height: 161px; width:221px;"></a>
       </div>
@@ -32,7 +32,11 @@
         </div>
       </div>
     </div>
-
+    <div class="row" ng-if="events.length==0">
+      <div class="col-md-6 col-sm-5 col-xs-12">
+        <h3 class="event-time">OOPS!! There are no events.</h3>
+      </div>
+    </div>
   </div>
   <script type="text/ng-template " id="loginerror.html ">
       <md-dialog>

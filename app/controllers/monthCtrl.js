@@ -35,35 +35,16 @@
         })
     }
 
-    // function changeMonth(user_id,max_date, min_date) {
-    //   console.log('user_id, max_date, min_date')
-    //   var temp = {}
-    //   console.log(user_id, max_date, min_date)
-    //   $scope.setDayContent(min_date)
-    //   // return AppManager.getEventsforTwoMonths(user_id, max_date, min_date)
-    //   //   .then(function(result) {
-    //   //     var events = result.timers
-    //   //     temp = getEvents(events)
-    //   //     console.log(temp)
-    //   //     $scope.dd = temp
-    //   //     $scope.size  = _.keys($scope.dd).length
-    //   //     console.log(_.keys($scope.dd).length)
-    //   //     return temp;
-    //   //   })
-    //   if(min_date == max_date){
-    //     return 0;
-    //   }else{
-
-    //     changeMonth(user_id, max_date, min_date)        
-    //   }
-    // }
     $scope.selectedDate = $rootScope.data.selectedDate
-    console.log($rootScope.data.minDate, $rootScope.data.maxDate, $rootScope.data.selectedDate)    
+    $scope.year = $rootScope.data.minDate.getFullYear()    
     $scope.newMinDate = Date.parse($rootScope.data.minDate) / 1000
     $scope.newMaxDate = Date.parse($rootScope.data.maxDate) / 1000
-    console.log($scope.newMinDate, $scope.newMaxDate, $scope.selectedDate)
+    
     abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
-    console.log("selectedDate "+ $scope.selectedDate)    
+    
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    $scope.month = monthNames[$rootScope.data.minDate.getMonth()]
+
     function getEvents(events) {
       var dateEvents = []
       var id = events.length;
@@ -91,6 +72,7 @@
     $scope.tooltips = true; 
 
     $rootScope.$watchCollection('data', function(newVal, oldVal) {
+      console.log("Values", newVal, oldVal)
       var minDate = $scope.minDate = Date.parse(oldVal.minDate) / 1000
       var newMinDate = $scope.newMinDate = Date.parse(newVal.minDate) / 1000
       var maxDate = $scope.maxDate = Date.parse(oldVal.maxDate) / 1000
@@ -103,22 +85,28 @@
       console.log(newVal.minDate)
       var selectedDate = Date.parse(newVal.selectedDate) / 1000
       console.log(selectedDate)
+      console.log($scope.minDate, $scope.newMinDate)
       if($scope.minDate != $scope.newMinDate){
         $state.go('calendar.month', {}, { reload: 'calendar.month' })
       }
       if (selectedDate >= minDate && selectedDate <= maxDate) {
         console.log('month')
-        console.log( $rootScope.data)
+        console.log($rootScope.data)
         //abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
       }else{
         console.log('getEventsforTwoMonths')
         abc = getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
       }
     })
-
+    $scope.changeMonth = function(selectedDate, currentMonth){
+      console.log('changeMonth')
+      $rootScope.data.selectedDate=selectedDate
+      $rootScope.currentMonth = currentMonth
+      console.log($rootScope.data.selectedDate, $rootScope.currentMonth)
+    }
     $scope.$watch(function() {
       // $scope.currentMonth = "2"
-      console.log("watch is running")
+      console.log("watch is running", $rootScope.data.selectedDate)
       $rootScope.data.selectedDate; 
       // $scope.minDate;
     });
@@ -227,6 +215,9 @@
             data = data.toString() + a.toString();
             // console.log(data)
           }
+        // }else{
+        //     var a = '<p style="overflow: hidden; text-overflow: ellipsis; max-width:160px; white-space:nowrap; font-size: 13px;" ng-click="">' + '&nbsp;' + '<br>' + '&nbsp;' + '</p>'
+        //     var data = a.toString();
         }
         // console.log(data)
         deferred.resolve(data);
