@@ -6,12 +6,9 @@
       getEventsforTwoMonths: function(current_user_id, user_id, max_date, min_date) {
         var deferred = $q.defer();
         var payload = new FormData();
-        console.log(current_user_id)
         if(current_user_id == "" || current_user_id == undefined || current_user_id == null){
-          console.log("!logged")          
           payload.append('data', '{"user_id":"' + user_id + '","max_date":"' + max_date + '","min_date":"' + min_date + '"}');
         }else{
-          console.log("logged")
           payload.append('data', '{"current_user_id":"'+current_user_id+'","user_id":"' + user_id + '","max_date":"' + max_date + '","min_date":"' + min_date + '"}');          
         }
         $http({
@@ -113,7 +110,6 @@
         return deferred.promise;
       },
       getEventsByLocation: function(lat, long, offset) {
-        console.log(lat, long, offset)
         var deferred = $q.defer();
         var payload = new FormData();
 
@@ -164,7 +160,6 @@
         return deferred.promise;
       },
       getEventsByEventId: function(current_user_id, event_id) {
-        console.log(event_id)
         var deferred = $q.defer();
         var payload = new FormData();
         if(current_user_id == "" || current_user_id == undefined || current_user_id == null){
@@ -188,7 +183,6 @@
         }
 
         function _error(err) {
-          console.log(err)
           deferred.reject(err);
         }
 

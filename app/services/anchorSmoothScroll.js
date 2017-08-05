@@ -1,7 +1,6 @@
 (function(){
 var app = angular.module('myApp')
 app.service('anchorSmoothScroll', function(){
-    // console.log('hi')
     this.scrollTo = function(eID) {
 
         // This scrolling function 

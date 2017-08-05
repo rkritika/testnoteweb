@@ -17,7 +17,6 @@
           _address.lng = lng || lng;
           _address.offset = offset || offset;
           _address.address = address || address
-          console.log(_address)
           $localStorage.address = _address
         },
 
@@ -25,8 +24,6 @@
           return _event || $localStorage.event;
         },
         getAddress: function() {
-          console.log("AJSJSJ")
-          console.log($localStorage.address)
           return _address || $localStorage.address;
         },
 

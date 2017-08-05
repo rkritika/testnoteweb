@@ -5,10 +5,8 @@
     $scope.baseurl = 'https://api.gotimenote.com/'
 $scope.EventsForWeek = []
     function getEventsforTwoMonths(user_id, max_date, min_date) {
-      // console.log('user_id, max_date, min_date')
       $scope.EventsForWeek = []
 
-      console.log(user_id, max_date, min_date)
       AppManager.getEventsforTwoMonths("",user_id, max_date, min_date)
         .then(function(result) {
           $("#BodyField").fadeOut();
@@ -20,7 +18,6 @@ $scope.EventsForWeek = []
             var shortTime = $filter("date")(date, "shortTime")
             var week = $filter("date")(date, "w")
               // $scope.week = week
-              // console.log($scope.week)
             var day = $filter("date")(date, "EEEE")
             events[key].date = shortDate
             events[key].time = shortTime
@@ -41,8 +38,6 @@ $scope.EventsForWeek = []
           var events = result;
           $scope.events = events
           var ev = getEvents(events, $scope.week)
-            // console.log(ev)
-            // console.log($scope.events)
             // $scope.EventsList = getEvents($scope.eventsList)
             // $scope.assignDate()
         })
@@ -56,17 +51,14 @@ $scope.EventsForWeek = []
     // }, function() {
     //   var date = $rootScope.selectedDate
     //   var week = $filter("date")(date, "w")
-    //   console.log(week)
     //   $scope.week = week
     //   getEvents($scope.events, week)
     // });
 
    $scope.goToEvent = function(event) {
-      // console.log(event)
       // event.user_id = $scope.user_id
       // $location.path('/calendar/'+$scope.user_id+ '/events/' +event.id)
       var url = $location.absUrl()
-      console.log(url)
       $state.go('calendar.event', {event:event, url: url});
     }
     $rootScope.$watchCollection('data', function(newVal, oldVal) {
@@ -77,39 +69,19 @@ $scope.EventsForWeek = []
       var selectedDate = Date.parse(newVal.selectedDate) / 1000
       var week = $scope.week = $filter("date")(newVal.selectedDate, "w")
       if (selectedDate >= minDate && selectedDate <= maxDate) {
-        // console.log('assignDate')
-        // console.log(minDate, maxDate, selectedDate)
-        // $scope.assignDate()
-        console.log(week)
         getEvents($scope.events, week)
       } else {
-        console.log('getEventsforTwoMonths')
         getEventsforTwoMonths($scope.user_id, $scope.newMaxDate, $scope.newMinDate)
       }
     })
 
     function getEvents(events, week) {
-      console.log("getEvents")
-      console.log(events)
-      console.log(week)
       $scope.EventsForWeek = []
       angular.forEach(events, function(value, key) {
-        console.log(key)
         var weekday = {};
         if (key == week) {
-          console.log(key)
-          console.log(weekday)
           weekday = _.groupBy(events[key], 'day')
-            // console.log(weekday)
           $scope.EventsForWeek = weekday
-
-          console.log($scope.EventsForWeek.Sunday)
-          console.log($scope.EventsForWeek.Monday)
-          console.log($scope.EventsForWeek.Tuesday)
-          console.log($scope.EventsForWeek.Wednesday)
-          console.log($scope.EventsForWeek.Thursday)
-          console.log($scope.EventsForWeek.Friday)
-          console.log($scope.EventsForWeek.Saturday)
             // $scope.EventsForWeek.Sunday = $scope.EventsForWeek.Sunday.splice(0,2)
 
         }

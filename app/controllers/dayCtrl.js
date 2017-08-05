@@ -2,11 +2,9 @@
     var app = angular.module('myApp')
     app.controller('dayCtrl', function($scope, $location, $anchorScroll, $document, AppManager, $http, $state, $rootScope, _, $filter, cfpLoadingBar, $stateParams, Data, auth, $mdDialog) {
         $scope.user_id = $stateParams.id
-        console.log($stateParams.id)
         $scope.events = []
         // return false;
         $scope.userName = {}
-        console.log($scope.events)
         var token = auth.getToken()
         if (token != undefined) {
             $scope.current_user_id = token.user_id
@@ -21,11 +19,9 @@
         }
         $scope.likeEvent = function(event) {
             if($scope.isLoggedIn){
-                console.log("logged in")
                 AppManager
                 .likeEvent($scope.current_user_id, $scope.token, event.id)
                 .then(function(result) {
-                    console.log(result)
                     if(event.type != null){
                       event.likes = parseInt(event.likes) - 1
                       event.type = null
@@ -48,21 +44,15 @@
             }
 
         }
-        console.log($rootScope.data.minDate, $scope.newminDate)
 
         function getEventsforTwoMonths(current_user_id, user_id, max_date, min_date) {
-            console.log('current_user_id, user_id, max_date, min_date')
-            console.log(current_user_id, user_id, max_date, min_date)
             AppManager.getEventsforTwoMonths($scope.current_user_id, user_id, max_date, min_date)
                 .then(function(result) {
-                  console.log(result)
                   $("#BodyField").fadeOut();
                   $scope.events = []
                   // cfpLoadingBar.complete()
                   // $scope.userName = { value: result.timers[0].user_username }
-                  // console.log($scope.userName)
                   // Data.setdata({key: $scope.userName});
-                  // console.log(Data.getdata())
                   var events = result.timers
                   if (events.length != 0) {
                       var count = 0
@@ -90,7 +80,6 @@
                     }
                 })
         }
-        console.log($rootScope.data.minDate, $scope.newminDate)
         $scope.newMinDate = Date.parse($rootScope.data.minDate) / 1000
         $scope.newMaxDate = Date.parse($rootScope.data.maxDate) / 1000
         getEventsforTwoMonths($scope.current_user_id, $scope.user_id, $scope.newMaxDate, $scope.newMinDate)
@@ -105,7 +94,6 @@
 
         function getEvents(events) {
             var id = events.length;
-            // console.log(id)
 
             for (var i = 0; i < events.length; i++) {
                 var date = new Date(events[i].time * 1000);
@@ -123,7 +111,6 @@
                     location: events[i].location_infos,
                     type: events[i].type
                 }
-                // console.log(data)
                 dateEvents.push(data)
             }
 
@@ -133,23 +120,17 @@
         // $rootScope.$watch(function() {
         //   return $rootScope.data;
         // }, function() {
-        //   console.log($rootScope.data)
         //   $scope.assignDate();
         // });
 
         $rootScope.$watchCollection('data', function(newVal, oldVal) {
-            console.log('data watchCollection', newVal, oldVal)
-            console.log($scope.data.selectedDate)
             $scope.events = []
             var minDate = $scope.minDate = Date.parse(oldVal.minDate) / 1000
             var newMinDate = $scope.newMinDate = Date.parse(newVal.minDate) / 1000
             var maxDate = $scope.maxDate = Date.parse(oldVal.maxDate) / 1000
             var newMaxDate = $scope.newMaxDate = Date.parse(newVal.maxDate) / 1000
             var selectedDate = Date.parse(newVal.selectedDate) / 1000
-            console.log(selectedDate, minDate, maxDate)
             if (selectedDate >= newMinDate && selectedDate <= newMaxDate) {
-                // console.log('assignDate')
-                // console.log(minDate, maxDate, selectedDate)
                 $scope.date = selectedDate;
                 // if($scope.EventsList.length == 0){
                 //     getEventsforTwoMonths($scope.current_user_id, $scope.user_id, $scope.newMaxDate, $scope.newMinDate)
@@ -161,8 +142,6 @@
                 // }
             } else {
                 $scope.events = []
-                // console.log('getEventsforTwoMonths')
-                // console.log(selectedDate)
                 getEventsforTwoMonths($scope.current_user_id, $scope.user_id, $scope.newMaxDate, $scope.newMinDate)
 
             }
@@ -172,10 +151,8 @@
         //   return $rootScope.data;
         // }, function() {
         //   // $scope.assignDate();
-        //   console.log($rootScope.days)
         // });
         $scope.assignDate = function() {
-            console.log('assignDate')
             var selectedDate = $rootScope.data.selectedDate
             var date = $filter("date")(selectedDate, "yyyy-MM-dd")
             var ddd = $filter("date")(selectedDate, "w")
@@ -183,7 +160,6 @@
         }
 
         function assignData(data, date) {
-            console.log('assignData', data, date)
             // $scope.events = []
             var eventFlag = false
             angular.forEach(data, function(value, key) {
@@ -191,33 +167,24 @@
                     eventFlag = true
                     var ev = data[key]
                     console.log(ev)
-                    console.log("------")
-                    console.log(key.substring(5, 7))
-                    // console.log(data.month)
                     var a = parseInt(key.substring(5, 7)) - 1;
                     $rootScope.currentMonth = a;
-                    console.log("Current Month " + $rootScope.currentMonth)
 
                     if (ev.length != 0) {
                         $scope.events = ev
-                        console.log($scope.events)
                     }
                 }
 
                 if(eventFlag == false){
                     var a = parseInt(date.substring(5, 7)) - 1;
                     $rootScope.currentMonth = a;
-                    // console.log(date.getMonth())
                 }
             })
-            // console.log( $scope.events)
         }
 
         $scope.goToEvent = function(event) {
-            // console.log(event)
             // event.user_id = $scope.user_id
             var url = $location.absUrl()
-            console.log(url)
             // $location.path('/calendar/'+$scope.user_id+ '/events/' +event.id)
 
             $state.go('calendar.event', { event: event, url: url, event_id: event.id });

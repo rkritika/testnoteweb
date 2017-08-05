@@ -13,7 +13,6 @@
       $scope.lat = $stateParams.lat
       $scope.lng = $stateParams.long
       $scope.address = $stateParams.address
-      // console.log($scope.address)
 
       findEvents($scope.lat, $scope.lng, 0)
     }
@@ -21,8 +20,6 @@
       data: []
     };
     $scope.posts.data = eventHandler.getEvents()  
-    console.log($scope.posts.data)
-    console.log($scope.posts)
     if ($scope.posts.data != undefined) {
       if ($scope.posts.data.length != 0) {
         $scope.slickConfig1Loaded = true;
@@ -34,7 +31,6 @@
         $scope.data = $scope.posts.data;
         // AppManager.getEventAddress($scope.lat, $scope.lng)
         // .then(function(result){
-        //   console.log(result[0].formatted_address)
         //   $scope.address = result[0].formatted_address
         // })
       }
@@ -45,12 +41,10 @@
     // }
     $scope.$on('gmPlacesAutocomplete::placeChanged', function() {
       var location = $scope.autocomplete.getPlace().geometry.location;
-      // console.log
       $scope.address = $scope.autocomplete.getPlace().formatted_address
       $scope.lat = location.lat();
       $scope.lng = location.lng();
       // $scope.lng = location.getPlace();
-      console.log($scope.address)
       $scope.$apply();
 
     });
@@ -72,38 +66,29 @@
           var address = result.data.results[2].formatted_address;
           $scope.autocomplete = address;
           $scope.address = address;
-          console.log($scope.address)
         });
     }
 
     $scope.search = function(lat, long, offset) {
-      console.log('search')
       $scope.slickConfig1Loaded = false;
       $scope.noDataResult = false;
-      // console.log($scope)
       var temp = 1;
       AppManager.getEventsByLocation(lat, long, temp)
         .then(function(result) {
-          console.log("---------")
-          console.log(result)
           $scope.offset = result.data.offset
           $scope.data = result.data.nearby
-          console.log($scope.data)
           if ($scope.data !== undefined && $scope.data !== null && $scope.data.length != 0) {
             // $scope.getEvents(result.data.nearby)
             $scope.getEvents($scope.data)
           } else {
-            console.log('no data')
             $scope.noDataResult = true;
           }
           var someElement = angular.element(document.getElementById('demo'));
-          // console.log(someElement)
           $document.scrollToElement(someElement, 30, 2000);
         })
     }
 
     function findEvents() {
-      console.log('findEvents')
       $scope.noDataResult = false;
       AppManager.getEventsByLocation($scope.lat, $scope.lng, 1)
         .then(function(result) {
@@ -112,7 +97,6 @@
           if ($scope.data !== undefined && $scope.data !== null && $scope.data.length != 0) {
             $scope.getEvents($scope.data)
           } else {
-            console.log('no data')
             $scope.noDataResult = true;
           }
           var someElement = angular.element(document.getElementById('demo'));
@@ -121,7 +105,6 @@
     }
 
     $scope.goToUser = function(user_id, date) {
-      // console.log(event)
       // event.user_id = $scope.user_id
       $location.path('/calendar/' + user_id + '/' + date)
 
@@ -131,54 +114,37 @@
     $scope.baseurl = 'https://api.gotimenote.com/'
 
     $scope.getEvents = function(data) {
-      console.log("Get Events Running")
       $scope.slickConfig1Loaded = true;
       var l = $scope.data.length
       // var l = data.length
-      console.log($scope.posts.data)      
       // $scope.posts.data = {};
 
-      console.log(l)
-      // console.log($scope.posts.data)
       if ($scope.posts.data != undefined) {
         if($scope.posts.data.length !== 0)
         {
           $scope.posts.data = []
-          console.log("loaded")
-          console.log($scope.posts.data)
-
         }
       }
       for (var i = 0; i < l; i++) {
-        // console.log(data[i])
         var temp = $scope.data[i].link
         temp = temp.split('.')
         $scope.data[i].link = $scope.baseurl + temp[0] + '_large.jpg'
         $scope.posts.data.push($scope.data[i])
       }
-      console.log($scope.posts.data)
-      console.log($scope.address, $scope.lat, $scope.lng)
-
       eventHandler.setEvents($scope.posts.data, $scope.lat, $scope.lng, $scope.offset, $scope.address)
       // $scope.updateEvents()
     }
 
     $scope.updateEvents = function() {
-      console.log('updateEvents')
       AppManager.getEventsByLocation($scope.lat, $scope.lng, $scope.offset)
         .then(function(result) {
-          console.log(result)
           $scope.offset = result.data.offset
-          console.log($scope.offset)
-          console.log($scope.data)
           var old_length = $scope.data.length
           for(var j=0; j < result.data.nearby.length; j++){
             $scope.data.push(result.data.nearby[j])
           }          
-          console.log($scope.data)      
           var new_length = $scope.data.length    
           // data = $scope.data = result.data.nearby
-          // console.log(data[0])          
           if ($scope.data !== undefined && $scope.data !== null && $scope.data.length != 0) {
             // $scope.getEvents(result.data.nearby)
             // $scope.getEvents($scope.data)
@@ -186,7 +152,6 @@
               var temp = $scope.data[i].link            
               temp = temp.split('.')
               $scope.data[i].link = $scope.baseurl + temp[0] + '_large.jpg'
-              console.log($)
                 // $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>'+ data[i].user_id +'</div>')
                 // ng-click="goToUser('+data[i].user_id+')"
               // $scope.slickConfig2.method.slickAdd(
@@ -195,7 +160,6 @@
                 // $scope.posts.data.push(data[i])
             }
           } else {
-            console.log('no data')
             $scope.noDataResult = true;
           }
           $scope.posts.data = $scope.data
@@ -208,13 +172,11 @@
         // var data = [];
 
       // for (i = off; i < off + count, n > 0; ++i, n--) {
-      //   // console.log(count - n)
 
       //   $scope.slickConfig2.method.slickAdd('<div style=' + 'color:black' + '>New</div>')
       //     // data.push($scope.data[count - n]);
       // }
       // $scope.posts.data = $scope.posts.data.concat(data)
-      // console.log($scope.posts.data.length)
       // $timeout(function() {
       //   $scope.slickConfig1Loaded = true;
       // }, 5);
@@ -288,7 +250,6 @@
         }
       ],
       // method : function(event, slick){
-      //   console.log("<div>New</div>")
       //   return slick.slickAdd("<div>New</div>")
       // }
       // ,
@@ -296,11 +257,9 @@
       // event: {
       //   afterChange: function(event, slick, currentSlide, nextSlide) {
       //     $scope.currentIndex = currentSlide; // save current index each time
-      //     console.log($scope.currentIndex)
       //   }
       //   // ,
       // init: function(event, slick) {
-      //   // console.log(event)
       //   return slick.slickGoTo($scope.currentIndex, false); // slide to correct index when init
       // }
 
@@ -313,11 +272,9 @@
       if (a % 9 == 0) {
         $scope.updateEvents()
       }
-      // console.log($scope.currentIndex)
     }
     $scope.prevIndex = function() {
       $scope.currentIndex--;
-      // console.log($scope.currentIndex)
     }
 
     $scope.logout = function() {
@@ -336,11 +293,8 @@
         .then(function(answer) {
           $window.location.reload()
           $scope.status = 'You said the information was \n"' + answer;
-          console.log($scope.status)
         }, function() {
           $scope.status = 'You cancelled the dialog.';
-          // console.log($scope.status)
-          console.log($scope.status)
 
         });
     };
@@ -349,7 +303,6 @@
       $scope.hide = function() {
         $mdDialog.hide();
       };
-      console.log(auth.isLoggedIn())
 
       $scope.cancel = function() {
         $mdDialog.cancel();
@@ -363,8 +316,6 @@
         var pass = md5.createHash(password)
         AppManager.login(user, pass)
           .then(function(result) {
-            console.log(result)
-            console.log("userName "+user)
             var result = result
             if (result.success === "true") {
               var access_token = result.data.access_token

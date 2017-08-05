@@ -6,20 +6,14 @@
         $scope.imgheart_change = '../../assets/images/ic_heart_change.png'
 
         $scope.imgcomment = '../../assets/images/ic_comments.png'
-        console.log($stateParams)
-        console.log($stateParams.event)
-        console.log(auth)
         var token = auth.getToken()
         if(token != undefined)
         {
           $scope.user_id = token.user_id
           $scope.token = token.access_token
         }
-        console.log(token)
-        console.log($scope.user_id)
         $scope.likeEvent = function (event) {
             if($scope.isLoggedIn){
-                console.log("logged in")
                 AppManager
                     .likeEvent($scope.user_id, $scope.token, $stateParams.event_id)
                         .then(function(result){
@@ -49,8 +43,6 @@
         AppManager
             .getEventsByEventId($scope.user_id, $stateParams.event_id)
                 .then(function(result) {
-                    console.log(result)
-                    console.log(result.list_images[0].link)
                     var ev = result.list_images[0].link.split('.')
                     result.list_images[0].link ="https://api.gotimenote.com/" + ev[0] + '_large.jpg'
                     // var temp =  + result.avatar
@@ -60,13 +52,11 @@
                     console.log($scope.data)
                     $scope.quote = "Website Link: "+ $scope.url + "   |   Event Name: " + $scope.data.name + "   |   Event Description: " + $scope.data.description
                 })
-        console.log($scope.data)
 
         // $scope.data = $stateParams.event
         // $scope.url = $stateParams.url
         
         // $scope.url = "http://localhost:3000/?_escaped_fragment_=/calendar/21993/1498543200/event"
-        // console.log($location.path())
         // $scope.url = "http://testnotewb.herokuapp.com/#/calendar/21993/1498543200"
         // $scope.url = "https:///#/calendar/19633/1497909600"
         // $scope.data.link = $scope.data.link.replace('_medium.', '_large.')
@@ -94,12 +84,8 @@
                 .then(function(answer) {
                     //$window.location.reload()
                     // $scope.status = 'You said the information was \n"' + answer;
-                    // console.log($scope.status)
                 }, function() {
                     //$scope.status = 'You cancelled the dialog.';
-                    // console.log($scope.status)
-                    //console.log($scope.status)
-
                 });
             }else{
                 $mdDialog.show({
@@ -120,12 +106,8 @@
 
         function SaveController($scope, $mdDialog, auth) {
             $scope.hide = function() {
-                console.log("HIDE1")
-
                 $mdDialog.hide();
-
             };
-            //console.log(auth.isLoggedIn())
 
             $scope.cancel = function() {
                 $mdDialog.cancel();
@@ -139,25 +121,17 @@
                 // var pass = md5.createHash(password)
                 var user_id = auth.getToken().user_id;
                 var username = auth.getToken().username;
-                console.log(auth)
                 var access_token = auth.getToken().access_token;
-                console.log(user_id)
-                console.log(access_token)
                 var auth1 = auth.getToken()
-                console.log(auth1)
                 var event_id = $stateParams.event_id;
-                console.log(event_id)
                 AppManager.saveEvent(username, user_id, event_id, access_token)
                     .then(function(result) {
-                        console.log(result)
                         var result = result
                         if (result.success === "true") {
                             // $mdDialog.cancel();
                             $scope.saveFlag = true
-                            console.log("Successfully saved")
                         } else {
                             $scope.saveFlag = false
-                            console.log('Not Logged In')
                         }
                         // return result
                     })
@@ -174,20 +148,14 @@
         // var data = $scope.data.time
         // // var time = $scope.data.time
         // // var date = new Date(date * 1000);
-        // console.log(data)
         // var temp = $filter("date")(data, "yyyy-MM-dd")
         // var time = $filter("date")(data, "shortTime")
         // $scope.data.date = temp
         // $scope.data.time = time
-        // console.log(data)
-
-        // console.log(temp)
-        // console.log(time)
 
         // var temp = $filter("date")(date, "yyyy-MM-dd")
         //     var time = $filter("date")(date, "shortTime")
         // var res = str.replace("Microsoft", "W3Schools");
-        // console.log(JSON.stringify($stateParams.event) )
 
     });
 
