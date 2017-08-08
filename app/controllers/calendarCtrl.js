@@ -111,6 +111,7 @@
         }
 
         $scope.id = $stateParams.id
+        // console.log($scope.id)
         $scope.logout = function() {
             auth.logout()
             $scope.isLoggedIn = false
@@ -128,6 +129,10 @@
                 }
             })
         $scope.today = function() {
+            if($stateParams.date == "" || $stateParams.date == undefined || $stateParams.date == null){
+                $stateParams.date = Date.parse(new Date())
+                $stateParams.date = $stateParams.date / 1000
+            }
             var date = $rootScope.selectedDate = $scope.dt = new Date($stateParams.date * 1000);
             $scope.year = date.getFullYear()
             var minDate = $scope.minDate = $rootScope.minDate = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -200,7 +205,7 @@
             return '';
         }
 
-        $scope.$watch('dt', function(newVal, oldVal) {
+        $scope.$watch('dt', function(newVal, oldVal) {            
             var date = $scope.dt
             $rootScope.data.selectedDate = date
             $rootScope.data.minDate = new Date(date.getFullYear(), date.getMonth(), 1);

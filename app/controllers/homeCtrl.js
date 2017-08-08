@@ -106,6 +106,16 @@
 
     $scope.goToUser = function(user_id, date) {
       // event.user_id = $scope.user_id
+      // console.log(date)
+      $location.path('/calendar/' + user_id + '/' + date)
+
+      // $state.go('calendar', { user_id: user_id });
+    }
+    $scope.goToMyCalendar = function(user_id) {
+      // console.log("My Calendat")
+      // event.user_id = $scope.user_id
+      var date = new Date()
+      // console.log(date)
       $location.path('/calendar/' + user_id + '/' + date)
 
       // $state.go('calendar', { user_id: user_id });
